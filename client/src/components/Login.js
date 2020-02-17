@@ -17,7 +17,7 @@ class Login extends Component {
     axios
       .put("http://localhost:5000/api/auth/login", { ...this.state })
       .then(res => res.data)
-      .then(user => console.log(user));
+      .then(user => this.props.history.push(`/home/${user.email}`));
   };
   inputHandler = e => {
     e.preventDefault();

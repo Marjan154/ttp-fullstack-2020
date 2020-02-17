@@ -15,7 +15,10 @@ class Register extends Component {
     e.preventDefault();
     axios
       .post("http://localhost:5000/api/users/create", { ...this.state })
-      .then(data => this.props.history.push(`/home/${this.state.email}`));
+      .then(data => {
+        console.log("data", data);
+        this.props.history.push(`/home/${data.email}`);
+      });
   };
 
   inputHandler = e => {
