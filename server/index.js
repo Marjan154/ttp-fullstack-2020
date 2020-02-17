@@ -2,10 +2,11 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const bodyParser = require("body-parser");
-const { db, User } = require("./models");
+const { db, Users } = require("./models");
 var cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 // middleware that should allow open access for requests to routes
 app.use(cors());
@@ -30,17 +31,44 @@ app.use(passport.initialize());
 // and attempt to put our user on 'req.user'
 app.use(passport.session());
 
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password", session: true },
+    function(username, password, done) {
+      Users.findOne({
+        where: {
+          email: username
+        }
+      })
+        .then(user => {
+          if (!user) {
+            return done(null, false, { message: "Incorrect username." });
+          }
+          if (user.password !== password) {
+            return done(null, false, { message: "Incorrect password." });
+          } else {
+            console.log("user is validated!");
+            return done(null, user);
+          }
+        })
+        .catch(err => {
+          return done(err);
+        });
+    }
+  )
+);
+
 // creates cookie
 // after finding or creating user, it is serialized on session
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.email);
 });
 
 // after serializing a user, serialize user on session
 // reads cookie
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id);
+    const user = await Users.findById(email);
     done(null, user);
   } catch (err) {
     done(err);

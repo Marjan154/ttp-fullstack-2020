@@ -35,22 +35,38 @@ router.get("/find", async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
   const { name, password, email } = req.body;
-  console.log(req.body);
-
-  try {
-    const created = await Users.create({
-      name,
-      password,
-      email
-    });
-    console.log(`created ${created.email}!`);
-    res.status(201).send({
-      name,
-      password,
-      email
-    });
-  } catch (err) {
-    res.status(400).send(error);
-    console.error(err);
+  if (name && email) {
+    //check database for email
+    try {
+      const found = await Users.findOne({
+        where: {
+          email
+        }
+      });
+      //if (user) respond user found
+      if (found) {
+        res.status(409).send("User exists");
+        console.log("user exists");
+      } else {
+        try {
+          const created = await Users.create({
+            name,
+            password,
+            email
+          });
+          console.log(`created ${created.email}!`);
+          res.status(201).send({
+            name,
+            password,
+            email
+          });
+        } catch (err) {
+          res.status(400).send(error);
+          console.error(err);
+        }
+      }
+    } catch (error) {
+      res.status(400).send(error);
+    }
   }
 });
