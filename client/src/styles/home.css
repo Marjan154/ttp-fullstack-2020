@@ -1,6 +1,6 @@
-body {
+/* body {
   background-color: white;
-}
+} */
 
 .title {
   color: #91b0ff;
@@ -33,4 +33,97 @@ body {
   text-align: left;
   background-color: #1e1e6e;
   color: white;
+}
+
+.grid-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.banner {
+  width: 100vw;
+  height: 80vh;
+  background-color: #91b0ff;
+}
+
+.summary {
+  width: 93vw;
+  height: 37vh;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  background-color: white;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 1000;
+  color: #91b0ff;
+  border: solid 1px #1e1e6e;
+}
+
+.stat {
+  width: 30vw;
+  height: 40vh;
+  display: flex;
+  margin: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 1000;
+  color: #91b0ff;
+  border: solid 1px #1e1e6e;
+}
+
+#homeTitle {
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 40px;
+  font-size: 70px;
+  font-weight: 1000;
+  color: white;
+  margin: 0;
+}
+
+.stat:hover {
+  box-shadow: 0 8px 16px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  text-decoration: none !important;
+}
+
+.stats {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.p-icon {
+  /* max-height: 100px; */
+  max-width: 30vw;
+  width: 150px;
+}
+
+#icons {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#icons p {
+  max-width: 30vw;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #245db3;
 }

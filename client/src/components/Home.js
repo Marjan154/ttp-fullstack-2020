@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import styles from "../styles/home.css";
 import axios from "axios";
+import Nav from "./Nav";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -13,103 +17,106 @@ class Home extends Component {
   }
 
   componentDidMount() {}
-  inputHandler = e => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
-    });
-  };
-  getAllStocks = searchval => {
-    const key = "3U80U5NMFKZXQKS7";
-    let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchval}&apikey=${key}`;
-    axios
-      .get(url)
-      .then(data =>
-        this.setState({ bestMatches: data.data.bestMatches }, () =>
-          console.log(data.data.bestMatches)
-        )
-      );
-  };
-  onSubmit = e => {
-    e.preventDefault();
-    this.getAllStocks(this.state.searchbarVal);
-  };
 
-  displaySearches = stockArray => {
-    let res =
-      stockArray &&
-      stockArray.map(stock => {
-        return (
-          <tr key={stock["1. symbol"]}>
-            <td> {stock["1. symbol"]}</td>
-            <td>{stock["2. name"]}</td>
-            <td>{stock["3. type"]}</td>
-            <td> {stock["4. region"]} </td>
-            <td>{stock["5. marketOpen"]}</td>
-            <td>{stock["6. marketClose"]}</td>
-            <td> {stock["7. timezone"]} </td>
-            <td>{stock["8. currency"]}</td>
-            <td>{stock["9. matchScore"]}</td>
-          </tr>
-          // <div>
-          //   {stock["1. symbol"]},{stock["2. name"]},{stock["3. type"]},
-          //   {stock["4. region"]},{stock["5. marketOpen"]},
-          //   {stock["6. marketClose"]},{stock["7. timezone"]},
-          //   {stock["8. currency"]},{stock["9. matchScore"]}
-          // </div>
-        );
-      });
-    return res;
-  };
   render() {
-    let res = this.displaySearches(this.state.bestMatches);
+    const { email } = this.state;
+    const d = new Date(Date.now());
     return (
       <div>
-        <div>
-          <h1>Welcome {this.state.email}</h1>
-          <h1>Profile (${this.state.totalCash})</h1>
-          <button>Buy Stock</button>
-          <form onSubmit={this.onSubmit}>
-            <input
-              type="text"
-              placeholder="Search stock"
-              name="searchbarVal"
-              onChange={this.inputHandler}
-            />
-            <button>Search</button>
-          </form>
-        </div>
-
-        <div>
+        <div className="banner">
+          <Nav />
           <div>
-            <table
-              className="datatable"
-              style={{
-                width: "85vw",
-                boxShadow: "4px 4px 5px grey",
-                margin: "auto",
-                paddingTop: "80px"
-              }}
-            >
-              <thead className="thead-light">
-                <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
+            {/* <h1>Welcome {this.state.email}</h1>
+          <h1>Profile (${this.state.totalCash})</h1> */}
+            <div className="grid-container" style={{ paddingTop: "70px" }}>
+              <h1
+                id="homeTitle"
+                style={
+                  {
+                    // paddingBottom: "20px"
+                  }
+                }
+              >
+                Welcome {email} !
+              </h1>
 
-                  <th>Type</th>
-                  <th>Region</th>
-                  <th>Market Open</th>
+              <h1
+                style={{
+                  color: "#1e1e6e",
+                  width: "100vw",
+                  margin: "0"
+                  // paddingBottom: "20px"
+                }}
+              >
+                {d.toDateString()}.
+                <br />
+                Your'e balance is ${this.state.totalCash}. What would you like
+                to do today?
+              </h1>
 
-                  <th>Market Close</th>
-                  <th>Timezone</th>
-                  <th>Currency</th>
+              <div className="stats">
+                <Link
+                  to={`/profile/${email}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="stat">
+                    <div>
+                      {/* <img
+                      src={require("../Images/taco.png")}
+                      style={{ padding: "20px" }}
+                      className="p-icon"
+                    ></img> */}
+                      <h1>View Profile</h1>
+                      <h3 style={{ color: "#1e1e6e" }}>
+                        You have ${this.state.totalCash}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
 
-                  <th>MatchScore</th>
-                </tr>
-              </thead>
-              <tbody>{res}</tbody>
-            </table>
+                <Link
+                  to={`/transactions/${email}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="stat">
+                    <div>
+                      {/* <img
+                      src={require("../Images/drop.png")}
+                      style={{ padding: "20px" }}
+                      className="p-icon"
+                    ></img> */}
+                      <h1>View Transactions</h1>
+                      <h3 style={{ color: "#1e1e6e" }}>
+                        {this.state.waterTotalToday} oz
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link
+                  to={`/transactions/${email}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="stat">
+                    <div>
+                      {/* <img
+                      src={require("../Images/sleeping.png")}
+                      style={{ padding: "20px" }}
+                      className="p-icon"
+                    ></img> */}
+                      <h1>Buy/Sell Stocks</h1>
+                      <h3 style={{ color: "#1e1e6e" }}>
+                        {/* {this.minutesToHoursTimeString(
+                        this.state.sleepTotalToday
+                      )} */}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
+          <Footer />
         </div>
       </div>
     );
