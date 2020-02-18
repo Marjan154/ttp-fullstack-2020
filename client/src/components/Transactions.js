@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "../styles/home.css";
 import axios from "axios";
-import { getAllStocks } from "../stockApi.js";
+import { getAllStocks, getStockPrice, getStockAllPrices } from "../stockApi.js";
 
 class Transactions extends Component {
   constructor(props) {
@@ -10,7 +10,9 @@ class Transactions extends Component {
       email: this.props.match.params.email,
       totalCash: 5000,
       searchbarVal: "",
-      bestMatches: []
+      bestMatches: [],
+      stockInfo: {},
+      display: []
     };
   }
   componentDidMount() {}
@@ -25,39 +27,39 @@ class Transactions extends Component {
     e.preventDefault();
     getAllStocks(this.state.searchbarVal).then(data => {
       this.setState({
-        bestMatches: data
+        bestMatches: data[0],
+        stockInfo: data[1]
       });
     });
   };
 
-  displaySearches = stockArray => {
+  viewPrice = symbol => {
+    getStockPrice(symbol).then(data => console.log(data));
+    //getStockAllPrices(symbol).then(data => console.log(data));
+  };
+
+  displaySearches = (stockArray, stockInfo) => {
     let res =
       stockArray &&
       stockArray.map(stock => {
         return (
-          <tr key={stock["1. symbol"]}>
-            <td> {stock["1. symbol"]}</td>
-            <td>{stock["2. name"]}</td>
-            <td>{stock["3. type"]}</td>
-            <td> {stock["4. region"]} </td>
-            <td>{stock["5. marketOpen"]}</td>
-            <td>{stock["6. marketClose"]}</td>
-            <td> {stock["7. timezone"]} </td>
-            <td>{stock["8. currency"]}</td>
-            <td>{stock["9. matchScore"]}</td>
+          <tr key={stock.symbol}>
+            <td> {stock.symbol}</td>
+            <td>{stock.securityName}</td>
+            <td>{stock.securityType}</td>
+            <td> {stock.region} </td>
+            <td>{stock.exchange}</td>
+            <td>{stockInfo[stock.symbol].price}</td>
           </tr>
-          // <div>
-          //   {stock["1. symbol"]},{stock["2. name"]},{stock["3. type"]},
-          //   {stock["4. region"]},{stock["5. marketOpen"]},
-          //   {stock["6. marketClose"]},{stock["7. timezone"]},
-          //   {stock["8. currency"]},{stock["9. matchScore"]}
-          // </div>
         );
       });
     return res;
   };
   render() {
-    let res = this.displaySearches(this.state.bestMatches);
+    let res = this.displaySearches(
+      this.state.bestMatches,
+      this.state.stockInfo
+    );
     return (
       <div>
         <h1>My Transactions</h1>
@@ -86,17 +88,12 @@ class Transactions extends Component {
               <thead className="thead-light">
                 <tr>
                   <th>Symbol</th>
-                  <th>Name</th>
+                  <th>Security Name</th>
 
-                  <th>Type</th>
+                  <th>Security Type</th>
                   <th>Region</th>
-                  <th>Market Open</th>
-
-                  <th>Market Close</th>
-                  <th>Timezone</th>
-                  <th>Currency</th>
-
-                  <th>MatchScore</th>
+                  <th>Exchange</th>
+                  <th>View</th>
                 </tr>
               </thead>
               <tbody>{res}</tbody>
