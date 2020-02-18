@@ -1,21 +1,29 @@
 import React, { Component } from "react";
 import styles from "../styles/home.css";
 import axios from "axios";
-import { getAllStocks, getStockPrice, getStockAllPrices } from "../stockApi.js";
+import Modal from "./Modal";
+import { Button } from "react-bootstrap";
+import { getAllStocks } from "../utils/stockApi.js";
+import { getBalance, makeTransaction } from "../utils/transactions";
 
-class Transactions extends Component {
+class MakeTransactions extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: this.props.match.params.email,
-      totalCash: 5000,
+      balance: 0,
       searchbarVal: "",
       bestMatches: [],
       stockInfo: {},
-      display: []
+      balance: 0
     };
   }
-  componentDidMount() {}
+
+  async componentDidMount() {
+    let balance = await getBalance(this.state.email);
+    this.setState({ balance });
+  }
+
   inputHandler = e => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value }, () => {
@@ -33,9 +41,37 @@ class Transactions extends Component {
     });
   };
 
-  viewPrice = symbol => {
-    getStockPrice(symbol).then(data => console.log(data));
-    //getStockAllPrices(symbol).then(data => console.log(data));
+  buyForm = (price, symbol) => (
+    <div>
+      The price is ${price}
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          this.buy(price, e.target.shares_amount.value, symbol);
+        }}
+      >
+        <input
+          type="number"
+          pattern="[0-9]*"
+          placeholder="Number of shares"
+          name="shares_amount"
+          defaultValue={0}
+        />
+        <button>Buy Shares</button>
+      </form>
+    </div>
+  );
+
+  buy = async (price, share, symbol) => {
+    let shares = parseInt(share);
+    let cost = parseFloat(price) * shares;
+    console.log(shares, cost, cost * shares);
+    if (this.state.balance < cost) {
+      console.log("not enough");
+    } else {
+      await makeTransaction({ shares, cost, symbol, email: this.state.email });
+      console.log("enough money");
+    }
   };
 
   displaySearches = (stockArray, stockInfo) => {
@@ -50,6 +86,14 @@ class Transactions extends Component {
             <td> {stock.region} </td>
             <td>{stock.exchange}</td>
             <td>{stockInfo[stock.symbol].price}</td>
+            <td>
+              <Modal
+                form={this.buyForm(stockInfo[stock.symbol].price, stock.symbol)}
+                label={"Buy"}
+                title={"Buy stock share"}
+                // refresh={this.refresh}
+              />
+            </td>
           </tr>
         );
       });
@@ -93,7 +137,8 @@ class Transactions extends Component {
                   <th>Security Type</th>
                   <th>Region</th>
                   <th>Exchange</th>
-                  <th>View</th>
+                  <th>Price</th>
+                  <th>Buy</th>
                 </tr>
               </thead>
               <tbody>{res}</tbody>
@@ -105,4 +150,4 @@ class Transactions extends Component {
   }
 }
 
-export default Transactions;
+export default MakeTransactions;

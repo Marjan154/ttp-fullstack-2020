@@ -7,7 +7,8 @@ import Register from "./components/Register";
 import Footer from "./components/Footer";
 import "./App.css";
 import Home from "./components/Home";
-import Transactions from "./components/Transactions";
+import MakeTransactions from "./components/MakeTransactions";
+import MyTransactions from "./components/MyTransactions";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/home/:email" component={Home} />
-          <Route exact path="/transactions/:email" component={Transactions} />
+          <Route exact path="/buy/:email" component={MakeTransactions} />
+          <Route exact path="/transactions/:email" component={MyTransactions} />
         </Switch>
       </Router>
       {/* <Footer /> */}

@@ -26,6 +26,13 @@ const Users = db.define(
       validate: {
         notEmpty: true
       }
+    },
+    balance: {
+      type: Sequelize.FLOAT,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     }
   },
   {

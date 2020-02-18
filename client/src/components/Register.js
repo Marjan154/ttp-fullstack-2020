@@ -17,7 +17,7 @@ class Register extends Component {
       .post("http://localhost:5000/api/users/create", { ...this.state })
       .then(data => {
         console.log("data", data);
-        this.props.history.push(`/home/${data.email}`);
+        this.props.history.push(`/home/${data.data.email}`);
       });
   };
 

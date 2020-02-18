@@ -17,9 +17,8 @@ router.get("/", async (req, res, next) => {
     });
 });
 
-router.get("/find", async (req, res, next) => {
-  console.log(req.query.email);
-  Users.findAndCountAll({
+router.get("/find/", async (req, res, next) => {
+  Users.findOne({
     where: {
       email: req.query.email
     }
@@ -35,6 +34,7 @@ router.get("/find", async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
   const { name, password, email } = req.body;
+  const balance = 5000;
   if (name && email) {
     //check database for email
     try {
@@ -52,13 +52,15 @@ router.post("/create", async (req, res, next) => {
           const created = await Users.create({
             name,
             password,
-            email
+            email,
+            balance
           });
           console.log(`created ${created.email}!`);
           res.status(201).send({
             name,
             password,
-            email
+            email,
+            balance
           });
         } catch (err) {
           res.status(400).send(error);

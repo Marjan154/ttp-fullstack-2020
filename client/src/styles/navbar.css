@@ -9,7 +9,7 @@
   top: 0;
   z-index: 1;
   padding-top: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 nav {
   height: 10px;
@@ -20,7 +20,7 @@ nav ul {
   top: 0;
   float: right;
   list-style-type: none;
-  margin-right: 2vw;
+  margin-left: 60vw;
   text-align: center;
   display: flex;
   flex-flow: row wrap;

@@ -27,6 +27,11 @@ class Nav extends Component {
               </Link>
             </li>
             <li>
+              <Link to={`/buy/${email}`} style={{ textDecoration: "none" }}>
+                Buy
+              </Link>
+            </li>
+            <li>
               <Link to="/" style={{ textDecoration: "none" }}>
                 Logout
               </Link>

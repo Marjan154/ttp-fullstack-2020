@@ -4,19 +4,23 @@ import axios from "axios";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { getBalance } from "../utils/transactions";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: this.props.match.params.email,
-      totalCash: 5000,
+      balance: 0,
       searchbarVal: "",
       bestMatches: []
     };
   }
 
-  componentDidMount() {}
+  async componentDidMount() {
+    let balance = await getBalance(this.state.email);
+    this.setState({ balance });
+  }
 
   render() {
     const { email } = this.state;
@@ -50,8 +54,8 @@ class Home extends Component {
               >
                 {d.toDateString()}.
                 <br />
-                Your'e balance is ${this.state.totalCash}. What would you like
-                to do today?
+                Your'e balance is ${this.state.balance}. What would you like to
+                do today?
               </h1>
 
               <div className="stats">
@@ -68,7 +72,7 @@ class Home extends Component {
                     ></img> */}
                       <h1>View Profile</h1>
                       <h3 style={{ color: "#1e1e6e" }}>
-                        You have ${this.state.totalCash}
+                        You have ${this.state.balance}
                       </h3>
                     </div>
                   </div>
@@ -86,17 +90,12 @@ class Home extends Component {
                       className="p-icon"
                     ></img> */}
                       <h1>View Transactions</h1>
-                      <h3 style={{ color: "#1e1e6e" }}>
-                        {this.state.waterTotalToday} oz
-                      </h3>
+                      <h3 style={{ color: "#1e1e6e" }}>x transactions</h3>
                     </div>
                   </div>
                 </Link>
 
-                <Link
-                  to={`/transactions/${email}`}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to={`/buy/${email}`} style={{ textDecoration: "none" }}>
                   <div className="stat">
                     <div>
                       {/* <img
