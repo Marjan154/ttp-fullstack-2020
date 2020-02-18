@@ -1,8 +1,17 @@
 import axios from "axios";
+import { getStockAllPrices } from "./stockApi.js";
 
-export let getAllTransactions = () => {
+export let getAllTransactions = async email => {
   let url = "http://localhost:5000/api/transactions/transactions/";
-  axios.get(url).then(data => console.log(data));
+  let trans = await axios.get(url, {
+    params: {
+      email
+    }
+  });
+  let symbols = trans.data.map(trans => trans.symbol);
+  let stockPrices = await getStockAllPrices(symbols);
+  console.log(stockPrices);
+  return [trans.data, stockPrices];
 };
 
 export let getBalance = async email => {

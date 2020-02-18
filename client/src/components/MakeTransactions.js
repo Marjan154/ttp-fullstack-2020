@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { Button } from "react-bootstrap";
 import { getAllStocks } from "../utils/stockApi.js";
 import { getBalance, makeTransaction } from "../utils/transactions";
+import Nav from "./Nav";
 
 class MakeTransactions extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class MakeTransactions extends Component {
           pattern="[0-9]*"
           placeholder="Number of shares"
           name="shares_amount"
-          defaultValue={0}
+          defaultValue={1}
         />
         <button>Buy Shares</button>
       </form>
@@ -105,8 +106,9 @@ class MakeTransactions extends Component {
       this.state.stockInfo
     );
     return (
-      <div>
-        <h1>My Transactions</h1>
+      <div style={{ marginTop: "100px" }}>
+        <Nav />
+        <h1>Make Transactions</h1>
         <div>
           <form onSubmit={this.onSubmit}>
             <input

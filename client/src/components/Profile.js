@@ -3,20 +3,21 @@ import axios from "axios";
 import { getAllTransactions } from "../utils/transactions";
 import Nav from "./Nav";
 
-class MyTransactions extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: this.props.match.params.email,
-      transactions: []
+      transactions: [],
+      prices: {}
     };
   }
   async componentDidMount() {
     let transactions = await getAllTransactions(this.state.email);
-    this.setState({ transactions: transactions[0] });
+    this.setState({ transactions: transactions[0], prices: transactions[1] });
   }
 
-  displayTrans = transArray => {
+  displayTrans = (transArray, priceArray) => {
     let res =
       transArray &&
       transArray.map(trans => {
@@ -24,13 +25,17 @@ class MyTransactions extends Component {
           <tr key={trans.symbol}>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
+            <td>{priceArray[trans.symbol].price * trans.shares}</td>
+            <td> {priceArray[trans.symbol].ohlc.open.price} </td>
+            <td> {priceArray[trans.symbol].price} </td>
+            <td> {priceArray[trans.symbol].ohlc.close.price} </td>
           </tr>
         );
       });
     return res;
   };
   render() {
-    let res = this.displayTrans(this.state.transactions);
+    let res = this.displayTrans(this.state.transactions, this.state.prices);
     return (
       <div style={{ marginTop: "100px" }}>
         <Nav />
@@ -50,6 +55,10 @@ class MyTransactions extends Component {
                 <tr>
                   <th>Symbol/Ticker</th>
                   <th>Number of Shares</th>
+                  <th>Current Values</th>
+                  <th>Open Price</th>
+                  <th>Current Price</th>
+                  <th>Close Price</th>
                 </tr>
               </thead>
               <tbody>{res}</tbody>
@@ -61,4 +70,4 @@ class MyTransactions extends Component {
   }
 }
 
-export default MyTransactions;
+export default Profile;
