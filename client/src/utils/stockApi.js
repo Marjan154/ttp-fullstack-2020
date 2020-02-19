@@ -1,6 +1,9 @@
 import axios from "axios";
+require("dotenv").config();
 
 const key = "Tpk_629c2ff3f36c4aa4821c7f061431f683";
+const skey = process.env.REACT_APP_IEX_API_KEY;
+
 export let getAllStocks = async searchval => {
   let url = `https://sandbox.iexapis.com/stable/search/${searchval}?token=${key}`;
   let stockdata = await axios.get(url).then(data => data.data);
@@ -22,9 +25,4 @@ export let getStockPrice = async symbol => {
     return data.data;
   });
   return sprice;
-
-  // GET /stock/{symbol}/price
-  // GET /stock/{symbol}/ohlc
-  // GET /search/{fragment}
-  // GET /stock/{symbol}/quote/{field}
 };
