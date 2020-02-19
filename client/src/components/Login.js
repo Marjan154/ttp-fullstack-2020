@@ -15,7 +15,7 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     axios
-      .put("http://localhost:5000/api/auth/login", { ...this.state })
+      .put("/api/auth/login", { ...this.state })
       .then(res => res.data)
       .then(user => this.props.history.push(`/home/${user.email}`));
   };

@@ -13,12 +13,10 @@ class Register extends Component {
   }
   onSubmit = e => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/users/create", { ...this.state })
-      .then(data => {
-        console.log("data", data);
-        this.props.history.push(`/home/${data.data.email}`);
-      });
+    axios.post("/api/users/create", { ...this.state }).then(data => {
+      console.log("data", data);
+      this.props.history.push(`/home/${data.data.email}`);
+    });
   };
 
   inputHandler = e => {

@@ -94,4 +94,12 @@ db.authenticate()
   });
 
 const port = 5000;
+
+// const root = path.join(__dirname, "build");
+// console.log(root);
+// app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
+
 app.listen(port, () => console.log(`app is listening on ${port}`));
