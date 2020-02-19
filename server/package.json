@@ -1,5 +1,5 @@
 {
-  "name": "health-tracker",
+  "name": "ttp-fullstack-2020",
   "version": "0.1.0",
   "private": true,
   "main": "index.js",
@@ -28,5 +28,9 @@
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.44.3"
+  },
+  "engines": {
+    "node": "12.6.0",
+    "npm": "6.9.0"
   }
 }
