@@ -34,7 +34,7 @@ router.get("/find/", async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
   const { name, password, email } = req.body;
-  const balance = 5000;
+  const balance = 5000.0;
   if (name && email) {
     //check database for email
     try {

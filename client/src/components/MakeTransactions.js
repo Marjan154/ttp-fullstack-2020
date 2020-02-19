@@ -22,7 +22,7 @@ class MakeTransactions extends Component {
 
   async componentDidMount() {
     let balance = await getBalance(this.state.email);
-    this.setState({ balance });
+    this.setState({ balance: Number(balance).toFixed(2) });
   }
 
   inputHandler = e => {
@@ -54,6 +54,8 @@ class MakeTransactions extends Component {
         <input
           type="number"
           pattern="[0-9]*"
+          min="1"
+          required
           placeholder="Number of shares"
           name="shares_amount"
           defaultValue={1}
@@ -106,14 +108,18 @@ class MakeTransactions extends Component {
       this.state.stockInfo
     );
     return (
-      <div style={{ marginTop: "100px" }}>
+      <div style={{ marginTop: "100px", marginBottom: "50px" }}>
         <Nav />
+        <h2 style={{ textAlign: "right", padding: "20px" }}>
+          Your balance is ${this.state.balance}
+        </h2>
         <h1>Make Transactions</h1>
-        <div>
+        <div style={{ marginBottom: "20px" }}>
           <form onSubmit={this.onSubmit}>
             <input
               type="text"
               placeholder="Search stock"
+              required
               name="searchbarVal"
               onChange={this.inputHandler}
             />

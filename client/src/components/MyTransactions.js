@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { getAllTransactions } from "../utils/transactions";
+import { getAllTransactions, getBalance } from "../utils/transactions";
 import Nav from "./Nav";
 
 class MyTransactions extends Component {
@@ -13,7 +13,11 @@ class MyTransactions extends Component {
   }
   async componentDidMount() {
     let transactions = await getAllTransactions(this.state.email);
-    this.setState({ transactions: transactions[0] });
+    let balance = await getBalance(this.state.email);
+    this.setState({
+      transactions: transactions[0],
+      balance: Number(balance).toFixed(2)
+    });
   }
 
   displayTrans = transArray => {
@@ -35,6 +39,9 @@ class MyTransactions extends Component {
     return (
       <div style={{ marginTop: "100px" }}>
         <Nav />
+        <h2 style={{ textAlign: "right", padding: "20px" }}>
+          Your balance is ${this.state.balance}
+        </h2>
         <h1>My Transactions</h1>
         <div>
           <div>

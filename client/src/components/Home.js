@@ -19,7 +19,7 @@ class Home extends Component {
 
   async componentDidMount() {
     let balance = await getBalance(this.state.email);
-    this.setState({ balance });
+    this.setState({ balance: Number(balance).toFixed(2) });
   }
 
   render() {

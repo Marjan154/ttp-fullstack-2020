@@ -51,7 +51,9 @@ router.post("/transactions", async function(req, res) {
     }
     try {
       await user
-        .updateAttributes({ balance: user.balance - parseInt(cost) })
+        .updateAttributes({
+          balance: user.balance.toFixed(2) - parseFloat(cost).toFixed(2)
+        })
         .then(() => console.log("user balance updated", user.balance));
     } catch (error) {
       res.send(error);
