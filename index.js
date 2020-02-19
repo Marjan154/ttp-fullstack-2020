@@ -93,7 +93,7 @@ db.authenticate()
     console.error("Unable to connect to the database!:", err);
   });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // const root = path.join(__dirname, "build");
 // console.log(root);
