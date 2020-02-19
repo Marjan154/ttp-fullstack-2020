@@ -4,13 +4,17 @@ const Sequelize = require("sequelize");
 const Transaction = db.define(
   "transactions",
   {
+    transid: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     date: {
       type: Sequelize.DATEONLY,
       allowNull: true
     },
     symbol: {
       type: Sequelize.STRING,
-      primaryKey: true,
       validate: {
         notEmpty: true
       }

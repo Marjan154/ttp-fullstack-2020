@@ -22,6 +22,7 @@ class MyTransactions extends Component {
       transArray.map(trans => {
         return (
           <tr key={trans.symbol}>
+            <td>{trans.date}</td>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
           </tr>
@@ -48,6 +49,7 @@ class MyTransactions extends Component {
             >
               <thead className="thead-light">
                 <tr>
+                  <th>Date</th>
                   <th>Symbol/Ticker</th>
                   <th>Number of Shares</th>
                 </tr>

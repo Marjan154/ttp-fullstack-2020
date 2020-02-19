@@ -3,6 +3,7 @@ const express = require("express");
 const parser = require("body-parser");
 const router = express.Router();
 const { Transaction, Users } = require("../models");
+const Sequelize = require("sequelize");
 module.exports = router;
 
 // router.use(morgan("dev"));
@@ -28,43 +29,24 @@ router.get("/transactions", (req, res) => {
 //ADD TRANSACTION
 router.post("/transactions", async function(req, res) {
   const { symbol, shares, email, cost } = req.body;
+  const date = Date.now();
   console.log("INFOOO", symbol, shares, email, cost);
   try {
-    let trans = await Transaction.findOne({
-      where: {
-        symbol,
-        email
-      }
-    });
-    console.log("TRANS IS", trans);
-
     let user = await Users.findOne({ where: { email } });
-
-    // if (user) {
-    if (trans) {
-      trans
-        .updateAttributes({
-          shares: trans.shares + parseInt(shares)
-        })
-        .then(() => {
-          console.log("Updated shares successfully");
-        });
-    } else {
-      console.log("should createeeee");
-      try {
-        await Transaction.create({
-          symbol,
-          email,
-          shares
-        });
-        console.log("created transaction");
-        res.status(201).send({
-          symbol,
-          shares
-        });
-      } catch (err) {
-        console.error(err);
-      }
+    try {
+      await Transaction.create({
+        symbol,
+        email,
+        shares,
+        date
+      });
+      console.log("created transaction");
+      res.status(201).send({
+        symbol,
+        shares
+      });
+    } catch (err) {
+      console.error(err);
     }
     try {
       await user
@@ -74,12 +56,30 @@ router.post("/transactions", async function(req, res) {
       res.send(error);
       console.log(error);
     }
-    // } else {
-    //   res.status(400).send("Invalid user");
-    // }
   } catch (error) {
     res.status(400).send(error);
   }
+});
+
+router.get("/groupbysymbol/", async (req, res, next) => {
+  const { email, symbol } = req.query;
+  const query = req.query.symbol ? { email, symbol } : { email };
+  Transaction.findAll({
+    where: query,
+    attributes: [
+      "symbol",
+      [Sequelize.fn("sum", Sequelize.col("shares")), "shares"]
+    ],
+    order: [["symbol", "DESC"]],
+    group: ["symbol"]
+  })
+    .then(userResponse => {
+      console.log("symbol" + userResponse);
+      res.status(200).json(userResponse);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
 });
 
 router

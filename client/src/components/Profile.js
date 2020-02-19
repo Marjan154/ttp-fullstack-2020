@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { getAllTransactions } from "../utils/transactions";
+import { getAllTransactions, getAllSymbols } from "../utils/transactions";
 import Nav from "./Nav";
 
 class Profile extends Component {
@@ -13,7 +13,7 @@ class Profile extends Component {
     };
   }
   async componentDidMount() {
-    let transactions = await getAllTransactions(this.state.email);
+    let transactions = await getAllSymbols(this.state.email);
     this.setState({ transactions: transactions[0], prices: transactions[1] });
   }
 
