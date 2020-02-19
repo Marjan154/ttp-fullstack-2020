@@ -26,9 +26,9 @@ class Profile extends Component {
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
             <td>{priceArray[trans.symbol].price * trans.shares}</td>
-            <td> {priceArray[trans.symbol].ohlc.open.price} </td>
+            <td> {priceArray[trans.symbol].ohlc.open.price || "N/A"} </td>
             <td> {priceArray[trans.symbol].price} </td>
-            <td> {priceArray[trans.symbol].ohlc.close.price} </td>
+            <td> {priceArray[trans.symbol].ohlc.close.price || "N/A"} </td>
           </tr>
         );
       });
@@ -39,7 +39,7 @@ class Profile extends Component {
     return (
       <div style={{ marginTop: "100px" }}>
         <Nav />
-        <h1>My Transactions</h1>
+        <h1>My Profile</h1>
         <div>
           <div>
             <table
