@@ -24,9 +24,10 @@ class MyTransactions extends Component {
   displayTrans = transArray => {
     let res =
       transArray &&
-      transArray.map(trans => {
+      transArray.map((trans, i) => {
         return (
           <tr key={trans.symbol}>
+            <td>{i + 1}</td>
             <td>{trans.date}</td>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
@@ -75,6 +76,7 @@ class MyTransactions extends Component {
               >
                 <thead className="thead-light">
                   <tr>
+                    <th>#</th>
                     <th>Date</th>
                     <th>Symbol/Ticker</th>
                     <th>Number of Shares</th>

@@ -18,7 +18,7 @@ router.use(
 //GET ALL TRANSACTIONS
 router.get("/transactions", (req, res) => {
   const { email } = req.query;
-  Transaction.findAll({ where: { email }, order: [["date", "DESC"]] })
+  Transaction.findAll({ where: { email }, order: [["date", "ASC"]] })
     .then(transactionResponse => {
       res.status(200).json(transactionResponse);
     })

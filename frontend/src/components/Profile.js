@@ -26,13 +26,22 @@ class Profile extends Component {
     let res =
       transArray &&
       transArray.map(trans => {
+        const currVal = priceArray[trans.symbol].price * trans.shares;
+        const color =
+          priceArray[trans.symbol].price >
+          priceArray[trans.symbol].ohlc.open.price
+            ? "green"
+            : "red";
+        let cstyle = {
+          color
+        };
         return (
           <tr key={trans.symbol}>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
-            <td>{priceArray[trans.symbol].price * trans.shares}</td>
-            <td> {priceArray[trans.symbol].ohlc.open.price || "N/A"} </td>
-            <td> {priceArray[trans.symbol].price} </td>
+            <td style={cstyle}>{currVal}</td>
+            <td>{priceArray[trans.symbol].ohlc.open.price || "N/A"} </td>
+            <td style={cstyle}> {priceArray[trans.symbol].price} </td>
             <td> {priceArray[trans.symbol].ohlc.close.price || "N/A"} </td>
           </tr>
         );
@@ -80,7 +89,7 @@ class Profile extends Component {
                   <tr>
                     <th>Symbol/Ticker</th>
                     <th>Number of Shares</th>
-                    <th>Current Values</th>
+                    <th>Current Value</th>
                     <th>Open Price</th>
                     <th>Current Price</th>
                     <th>Close Price</th>

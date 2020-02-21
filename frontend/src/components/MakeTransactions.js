@@ -17,7 +17,8 @@ class MakeTransactions extends Component {
       searchbarVal: "",
       bestMatches: [],
       stockInfo: {},
-      balance: 0
+      balance: 0,
+      price: 0
     };
   }
 
@@ -70,7 +71,7 @@ class MakeTransactions extends Component {
 
   buyForm = (price, symbol) => (
     <div>
-      The price is ${price}
+      <h2 id="cost">The price is ${price}</h2>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -195,7 +196,7 @@ class MakeTransactions extends Component {
                       <th>Symbol</th>
                       <th>Security Name</th>
 
-                      <th>Security Type</th>
+                      <th>Security</th>
                       <th>Region</th>
                       <th>Exchange</th>
                       <th>Price</th>
