@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log("url", this.props);
+    console.log(this.props.match.params.email);
     let balance = await getBalance(this.state.email);
     this.setState({ balance: Number(balance).toFixed(2) });
   }
@@ -28,6 +28,7 @@ class Home extends Component {
     const d = new Date(Date.now());
     return (
       <div>
+        <MyNav />
         <div>
           {/* <MyNav /> */}
           <div className="banner">
@@ -81,7 +82,9 @@ class Home extends Component {
                         className="p-icon"
                       ></img>
                       <h1>View Transactions</h1>
-                      <h3 style={{ color: "#1e1e6e" }}>x transactions</h3>
+                      <h3 style={{ color: "#1e1e6e" }}>
+                        Keep track of purchases
+                      </h3>
                     </div>
                   </div>
                 </Link>
@@ -94,11 +97,9 @@ class Home extends Component {
                         style={{ padding: "20px" }}
                         className="p-icon"
                       ></img>
-                      <h1>Buy/Sell Stocks</h1>
+                      <h1>Buy Stocks</h1>
                       <h3 style={{ color: "#1e1e6e" }}>
-                        {/* {this.minutesToHoursTimeString(
-                        this.state.sleepTotalToday
-                      )} */}
+                        Search and buy stocks
                       </h3>
                     </div>
                   </div>

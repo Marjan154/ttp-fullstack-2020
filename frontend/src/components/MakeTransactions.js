@@ -5,7 +5,8 @@ import Modal from "./Modal";
 import { Button } from "react-bootstrap";
 import { getAllStocks } from "../utils/stockApi.js";
 import { getBalance, makeTransaction } from "../utils/transactions";
-import Nav from "./Nav";
+import MyNav from "./Nav";
+import Footer from "./Footer";
 
 class MakeTransactions extends Component {
   constructor(props) {
@@ -54,9 +55,7 @@ class MakeTransactions extends Component {
 
   inputHandler = e => {
     e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
-    });
+    this.setState({ [e.target.name]: e.target.value }, () => {});
   };
 
   onSubmit = e => {
@@ -141,70 +140,74 @@ class MakeTransactions extends Component {
       this.state.stockInfo
     );
     return (
-      <div style={{ marginTop: "100px", marginBottom: "50px" }}>
-        <h1
-          style={{
-            fontSize: "5rem",
-            margin: "30px",
-            color: "#1e1e6e",
-            marginTop: "-5vh"
-          }}
-        >
-          Make Transactions
-        </h1>
-        <h1
-          style={{
-            textAlign: "right",
-            padding: "40px",
-            color: "#91b0ff",
-            marginTop: "-5vh"
-          }}
-        >
-          Your balance is ${this.state.balance}
-        </h1>
+      <div>
+        {" "}
+        <MyNav />
+        <div style={{ marginTop: "100px", marginBottom: "50px" }}>
+          <h1
+            style={{
+              fontSize: "5rem",
+              margin: "30px",
+              color: "#1e1e6e",
+              marginTop: "-5vh"
+            }}
+          >
+            Make Transactions
+          </h1>
+          <h1
+            style={{
+              textAlign: "right",
+              padding: "40px",
+              color: "#91b0ff",
+              marginTop: "-5vh"
+            }}
+          >
+            Your balance is ${this.state.balance}
+          </h1>
 
-        <div style={{ marginBottom: "20px" }}>
-          <form onSubmit={this.onSubmit}>
-            <input
-              type="text"
-              placeholder="Search stock"
-              required
-              name="searchbarVal"
-              onChange={this.inputHandler}
-              style={this.stylesInput}
-            />
-            <button style={this.stylesButton}>Search</button>
-          </form>
-        </div>
-        <div>
+          <div style={{ marginBottom: "20px" }}>
+            <form onSubmit={this.onSubmit}>
+              <input
+                type="text"
+                placeholder="Search stock"
+                required
+                name="searchbarVal"
+                onChange={this.inputHandler}
+                style={this.stylesInput}
+              />
+              <button style={this.stylesButton}>Search</button>
+            </form>
+          </div>
           <div>
-            <table
-              className="datatable"
-              style={{
-                width: "85vw",
-                boxShadow: "4px 4px 5px grey",
-                margin: "auto",
-                paddingTop: "80px"
-              }}
-            >
-              {res.length ? (
-                <thead className="thead-light">
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Security Name</th>
+            <div style={{ marginBottom: "50px" }}>
+              <table
+                className="datatable"
+                style={{
+                  width: "85vw",
+                  boxShadow: "4px 4px 5px grey",
+                  margin: "auto",
+                  paddingTop: "80px"
+                }}
+              >
+                {res.length ? (
+                  <thead className="thead-light">
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Security Name</th>
 
-                    <th>Security Type</th>
-                    <th>Region</th>
-                    <th>Exchange</th>
-                    <th>Price</th>
-                    <th>Buy</th>
-                  </tr>
-                </thead>
-              ) : (
-                <div></div>
-              )}
-              <tbody>{res}</tbody>
-            </table>
+                      <th>Security Type</th>
+                      <th>Region</th>
+                      <th>Exchange</th>
+                      <th>Price</th>
+                      <th>Buy</th>
+                    </tr>
+                  </thead>
+                ) : (
+                  <div></div>
+                )}
+                <tbody>{res}</tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

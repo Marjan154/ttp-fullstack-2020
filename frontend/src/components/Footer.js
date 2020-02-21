@@ -12,8 +12,8 @@ class Footer extends Component {
           backgroundColor: "#1e1e6e",
           color: "white",
           paddingTop: "5px",
-          marginBottom: "-1000px",
-          position: "static"
+          position: "relative",
+          marginTop: "60vh"
         }}
       >
         <div className="container text-center">

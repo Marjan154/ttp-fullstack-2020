@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { getAllSymbols, getBalance } from "../utils/transactions";
-import Nav from "./Nav";
+import MyNav from "./Nav";
 
 class Profile extends Component {
   constructor(props) {
@@ -42,50 +42,53 @@ class Profile extends Component {
   render() {
     let res = this.displayTrans(this.state.transactions, this.state.prices);
     return (
-      <div style={{ marginTop: "100px" }}>
-        <h1
-          style={{
-            fontSize: "5rem",
-            margin: "30px",
-            color: "#1e1e6e",
-            marginTop: "-5vh"
-          }}
-        >
-          Profile
-        </h1>
-        <h1
-          style={{
-            textAlign: "right",
-            padding: "40px",
-            color: "#91b0ff",
-            marginTop: "-5vh"
-          }}
-        >
-          Your balance is ${this.state.balance}
-        </h1>
-        <div>
+      <div>
+        <MyNav />
+        <div style={{ marginTop: "100px" }}>
+          <h1
+            style={{
+              fontSize: "5rem",
+              margin: "30px",
+              color: "#1e1e6e",
+              marginTop: "-5vh"
+            }}
+          >
+            Profile
+          </h1>
+          <h1
+            style={{
+              textAlign: "right",
+              padding: "40px",
+              color: "#91b0ff",
+              marginTop: "-5vh"
+            }}
+          >
+            Your balance is ${this.state.balance}
+          </h1>
           <div>
-            <table
-              className="datatable"
-              style={{
-                width: "85vw",
-                boxShadow: "4px 4px 5px grey",
-                margin: "auto",
-                paddingTop: "80px"
-              }}
-            >
-              <thead className="thead-light">
-                <tr>
-                  <th>Symbol/Ticker</th>
-                  <th>Number of Shares</th>
-                  <th>Current Values</th>
-                  <th>Open Price</th>
-                  <th>Current Price</th>
-                  <th>Close Price</th>
-                </tr>
-              </thead>
-              <tbody>{res}</tbody>
-            </table>
+            <div>
+              <table
+                className="datatable"
+                style={{
+                  width: "85vw",
+                  boxShadow: "4px 4px 5px grey",
+                  margin: "auto",
+                  paddingTop: "80px"
+                }}
+              >
+                <thead className="thead-light">
+                  <tr>
+                    <th>Symbol/Ticker</th>
+                    <th>Number of Shares</th>
+                    <th>Current Values</th>
+                    <th>Open Price</th>
+                    <th>Current Price</th>
+                    <th>Close Price</th>
+                  </tr>
+                </thead>
+                <tbody>{res}</tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@ function App() {
     <div>
       <div className="App">
         <Router basename="/">
-          <MyNav />
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />

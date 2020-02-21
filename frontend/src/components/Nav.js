@@ -3,11 +3,17 @@ import { Link, withRouter } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import styles from "../styles/navbar.css";
 import { LinkContainer } from "react-router-bootstrap";
-// import "https://fonts.googleapis.com/css?family=Ubuntu&display=swap";
 
 class MyNav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: this.props.match.params.email
+    };
+  }
   render() {
-    const email = "john@john.com";
+    console.log(this.props);
+    const { email } = this.state;
     const stylesHome = {
       height: "100px",
       fontSize: "40px",
@@ -24,11 +30,9 @@ class MyNav extends Component {
       color: "#1e1e6e",
       backgroundColor: "white"
     };
-    console.log("hashome", this.props.location.pathname.includes("/home/"));
     const styles = this.props.location.pathname.includes("/home/")
       ? stylesHome
       : stylesOther;
-    console.log(styles);
     if (
       this.props.location.pathname === "/" ||
       this.props.location.pathname === "/register"
@@ -44,9 +48,12 @@ class MyNav extends Component {
           }
           style={styles}
         >
-          <Navbar.Brand style={styles} href={`/home/${email}`}>
-            StockPortfolio
-          </Navbar.Brand>
+          <LinkContainer style={styles} to={`/home/${email}`}>
+            <Navbar.Brand style={styles} href={`/home/${email}`}>
+              StockPortfolio
+            </Navbar.Brand>
+          </LinkContainer>
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
             id="responsive-navbar-nav"
@@ -65,26 +72,6 @@ class MyNav extends Component {
               <LinkContainer style={styles} to={`/`}>
                 <NavItem eventKey={4}>Logout</NavItem>
               </LinkContainer>
-              {/* <Link to={`/home/${email}`}>
-                <Nav.Link style={styles} eventKey={1}>
-                  Home
-                </Nav.Link>
-              </Link>
-              <Link to={`/buy/${email}`}>
-                <Nav.Link style={styles} eventKey={2}>
-                  Buy
-                </Nav.Link>
-              </Link>
-              <Link to={`/transactions/${email}`}>
-                <Nav.Link style={styles} eventKey={3}>
-                  Transactions
-                </Nav.Link>
-              </Link>
-              <Link to={`/`}>
-                <Nav.Link style={styles} eventKey={4}>
-                  Logout
-                </Nav.Link>
-              </Link> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
