@@ -39,6 +39,7 @@ router.post("/transactions", async function(req, res) {
         symbol,
         email,
         shares,
+        cost: parseFloat(cost).toFixed(2),
         date
       });
       console.log("created transaction");

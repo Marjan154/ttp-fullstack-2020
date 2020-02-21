@@ -25,6 +25,12 @@ const Transaction = db.define(
         notEmpty: true
       }
     },
+    cost: {
+      type: Sequelize.FLOAT,
+      validate: {
+        notEmpty: true
+      }
+    },
     email: {
       type: Sequelize.TEXT,
       allowNull: false,

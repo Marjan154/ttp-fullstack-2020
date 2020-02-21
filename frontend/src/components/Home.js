@@ -42,7 +42,7 @@ class Home extends Component {
                   marginTop: "-15vh"
                 }}
               >
-                {d.toDateString()}.
+                Today is {d.toDateString()}.
                 <br />
                 Your'e balance is ${this.state.balance}. What would you like to
                 do today?
@@ -55,11 +55,11 @@ class Home extends Component {
                 >
                   <div className="stat">
                     <div>
-                      {/* <img
-                      src={require("../Images/taco.png")}
-                      style={{ padding: "20px" }}
-                      className="p-icon"
-                    ></img> */}
+                      <img
+                        src={require("../images/user.png")}
+                        style={{ padding: "20px" }}
+                        className="p-icon"
+                      ></img>
                       <h1>View Profile</h1>
                       <h3 style={{ color: "#1e1e6e" }}>
                         You have ${this.state.balance}
@@ -74,11 +74,11 @@ class Home extends Component {
                 >
                   <div className="stat">
                     <div>
-                      {/* <img
-                      src={require("../Images/drop.png")}
-                      style={{ padding: "20px" }}
-                      className="p-icon"
-                    ></img> */}
+                      <img
+                        src={require("../images/transaction.png")}
+                        style={{ padding: "20px" }}
+                        className="p-icon"
+                      ></img>
                       <h1>View Transactions</h1>
                       <h3 style={{ color: "#1e1e6e" }}>x transactions</h3>
                     </div>
@@ -88,11 +88,11 @@ class Home extends Component {
                 <Link to={`/buy/${email}`} style={{ textDecoration: "none" }}>
                   <div className="stat">
                     <div>
-                      {/* <img
-                      src={require("../Images/sleeping.png")}
-                      style={{ padding: "20px" }}
-                      className="p-icon"
-                    ></img> */}
+                      <img
+                        src={require("../images/payment-method.png")}
+                        style={{ padding: "20px" }}
+                        className="p-icon"
+                      ></img>
                       <h1>Buy/Sell Stocks</h1>
                       <h3 style={{ color: "#1e1e6e" }}>
                         {/* {this.minutesToHoursTimeString(
@@ -105,7 +105,6 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          {/* <Footer /> */}
         </div>
       </div>
     );

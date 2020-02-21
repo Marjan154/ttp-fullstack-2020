@@ -142,10 +142,24 @@ class MakeTransactions extends Component {
     );
     return (
       <div style={{ marginTop: "100px", marginBottom: "50px" }}>
-        <h1 style={{ fontSize: "5rem", margin: "30px", color: "#1e1e6e" }}>
+        <h1
+          style={{
+            fontSize: "5rem",
+            margin: "30px",
+            color: "#1e1e6e",
+            marginTop: "-5vh"
+          }}
+        >
           Make Transactions
         </h1>
-        <h1 style={{ textAlign: "right", padding: "40px", color: "#91b0ff" }}>
+        <h1
+          style={{
+            textAlign: "right",
+            padding: "40px",
+            color: "#91b0ff",
+            marginTop: "-5vh"
+          }}
+        >
           Your balance is ${this.state.balance}
         </h1>
 

@@ -15,19 +15,25 @@ import { Navbar, Nav } from "react-bootstrap";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <MyNav />
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/home/:email" component={Home} />
-          <Route exact path="/buy/:email" component={MakeTransactions} />
-          <Route exact path="/transactions/:email" component={MyTransactions} />
-          <Route exact path="/profile/:email" component={Profile} />
-        </Switch>
-      </Router>
-      {/* <Footer /> */}
+    <div>
+      <div className="App">
+        <Router>
+          <MyNav />
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/home/:email" component={Home} />
+            <Route exact path="/buy/:email" component={MakeTransactions} />
+            <Route
+              exact
+              path="/transactions/:email"
+              component={MyTransactions}
+            />
+            <Route exact path="/profile/:email" component={Profile} />
+          </Switch>
+        </Router>
+      </div>
+      <Footer />
     </div>
   );
 }

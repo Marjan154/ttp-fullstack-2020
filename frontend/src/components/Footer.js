@@ -8,20 +8,30 @@ class Footer extends Component {
         style={{
           bottom: 0,
           width: "100%",
-          height: "120px",
+          height: "130px",
           backgroundColor: "#1e1e6e",
           color: "white",
           paddingTop: "5px",
-          // marginBottom: "-700px",
+          marginBottom: "-1000px",
           position: "static"
         }}
       >
         <div className="container text-center">
-          <span className="myfont" style={{ width: "100%" }}>
+          <span className="myfont" style={{ width: "100%", fontSize: "30px" }}>
             <b>Created by: </b>
             <br />
             Marjan Ansar
           </span>
+          <div>
+            Icons made by{" "}
+            <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+              Freepik
+            </a>{" "}
+            from{" "}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </div>
         </div>
       </footer>
     );
