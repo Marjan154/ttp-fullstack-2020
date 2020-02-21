@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Ubuntu&display=swap");
 
-.nav-link {
+.nav-item {
   padding: 2rem !important;
 }
 .navbar-brand {
   padding: 2rem !important;
 }
-a.nav-link:hover {
+div.nav-item:hover {
   animation: bounce 2.5s infinite;
   -webkit-animation: bounce 2.5s infinite;
   -moz-animation: bounce 2.5s infinite;
