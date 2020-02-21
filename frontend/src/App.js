@@ -10,11 +10,14 @@ import Home from "./components/Home";
 import MakeTransactions from "./components/MakeTransactions";
 import MyTransactions from "./components/MyTransactions";
 import Profile from "./components/Profile";
+import MyNav from "./components/Nav";
+import { Navbar, Nav } from "react-bootstrap";
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <MyNav />
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />

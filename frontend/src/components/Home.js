@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "../styles/home.css";
 import axios from "axios";
-import Nav from "./Nav";
+import MyNav from "./Nav";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { getBalance } from "../utils/transactions";
@@ -27,29 +27,19 @@ class Home extends Component {
     const d = new Date(Date.now());
     return (
       <div>
-        <div className="banner">
-          <Nav />
-          <div>
+        <div>
+          {/* <MyNav /> */}
+          <div className="banner">
             {/* <h1>Welcome {this.state.email}</h1>
           <h1>Profile (${this.state.totalCash})</h1> */}
-            <div className="grid-container" style={{ paddingTop: "70px" }}>
-              <h1
-                id="homeTitle"
-                style={
-                  {
-                    // paddingBottom: "20px"
-                  }
-                }
-              >
-                Welcome {email} !
-              </h1>
+            <div className="grid-container">
+              <h1 id="homeTitle">Welcome {email} !</h1>
 
               <h1
                 style={{
-                  color: "#1e1e6e",
+                  color: "white",
                   width: "100vw",
-                  margin: "0"
-                  // paddingBottom: "20px"
+                  marginTop: "-15vh"
                 }}
               >
                 {d.toDateString()}.
@@ -115,7 +105,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     );

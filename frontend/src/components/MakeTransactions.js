@@ -25,6 +25,33 @@ class MakeTransactions extends Component {
     this.setState({ balance: Number(balance).toFixed(2) });
   }
 
+  stylesInput = {
+    width: "80%",
+    boxSizing: "border-box",
+    border: "2px solid #ccc",
+    borderRadius: "4px",
+    fontSize: "30px",
+    backgroundColor: "white",
+    backgroundPosition: "10px 10px",
+    backgroundRepeat: " no-repeat",
+    padding: "12px 20px 12px 40px"
+  };
+  stylesButton = {
+    backgroundColor: "#1e1e6e",
+    inline: "block",
+    border: "none",
+    color: "white",
+    padding: "14px",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "inline - block",
+    fontSize: "30px",
+    margin: "4px 2px",
+    cursor: "pointer",
+    borderRadius: "10px",
+    marginLeft: "5px"
+  };
+
   inputHandler = e => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value }, () => {
@@ -60,7 +87,7 @@ class MakeTransactions extends Component {
           name="shares_amount"
           defaultValue={1}
         />
-        <button>Buy Shares</button>
+        <button>Buy</button>
       </form>
     </div>
   );
@@ -75,6 +102,12 @@ class MakeTransactions extends Component {
       await makeTransaction({ shares, cost, symbol, email: this.state.email });
       console.log("enough money");
     }
+  };
+
+  refresh = async () => {
+    getBalance(this.state.email).then(balance => {
+      this.setState({ balance: Number(balance).toFixed(2) });
+    });
   };
 
   displaySearches = (stockArray, stockInfo) => {
@@ -94,7 +127,7 @@ class MakeTransactions extends Component {
                 form={this.buyForm(stockInfo[stock.symbol].price, stock.symbol)}
                 label={"Buy"}
                 title={"Buy stock share"}
-                // refresh={this.refresh}
+                refresh={this.refresh}
               />
             </td>
           </tr>
@@ -109,11 +142,13 @@ class MakeTransactions extends Component {
     );
     return (
       <div style={{ marginTop: "100px", marginBottom: "50px" }}>
-        <Nav />
-        <h2 style={{ textAlign: "right", padding: "20px" }}>
+        <h1 style={{ fontSize: "5rem", margin: "30px", color: "#1e1e6e" }}>
+          Make Transactions
+        </h1>
+        <h1 style={{ textAlign: "right", padding: "40px", color: "#91b0ff" }}>
           Your balance is ${this.state.balance}
-        </h2>
-        <h1>Make Transactions</h1>
+        </h1>
+
         <div style={{ marginBottom: "20px" }}>
           <form onSubmit={this.onSubmit}>
             <input
@@ -122,8 +157,9 @@ class MakeTransactions extends Component {
               required
               name="searchbarVal"
               onChange={this.inputHandler}
+              style={this.stylesInput}
             />
-            <button>Search</button>
+            <button style={this.stylesButton}>Search</button>
           </form>
         </div>
         <div>
@@ -137,18 +173,22 @@ class MakeTransactions extends Component {
                 paddingTop: "80px"
               }}
             >
-              <thead className="thead-light">
-                <tr>
-                  <th>Symbol</th>
-                  <th>Security Name</th>
+              {res.length ? (
+                <thead className="thead-light">
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Security Name</th>
 
-                  <th>Security Type</th>
-                  <th>Region</th>
-                  <th>Exchange</th>
-                  <th>Price</th>
-                  <th>Buy</th>
-                </tr>
-              </thead>
+                    <th>Security Type</th>
+                    <th>Region</th>
+                    <th>Exchange</th>
+                    <th>Price</th>
+                    <th>Buy</th>
+                  </tr>
+                </thead>
+              ) : (
+                <div></div>
+              )}
               <tbody>{res}</tbody>
             </table>
           </div>

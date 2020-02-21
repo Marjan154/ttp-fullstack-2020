@@ -15,7 +15,9 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     axios
-      .put("/api/auth/login", { ...this.state })
+      .put("https://floating-bastion-36036.herokuapp.com/api/auth/login", {
+        ...this.state
+      })
       .then(res => res.data)
       .then(user => this.props.history.push(`/home/${user.email}`));
   };

@@ -38,7 +38,6 @@ class Profile extends Component {
     let res = this.displayTrans(this.state.transactions, this.state.prices);
     return (
       <div style={{ marginTop: "100px" }}>
-        <Nav />
         <h1>My Profile</h1>
         <div>
           <div>

@@ -1,76 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Ubuntu&display=swap");
 
-#nav-container {
-  width: 100%;
-  /* background: transparent; */
-  float: right;
-  background-color: #91b0ff;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  padding-top: 15px;
-  padding-bottom: 50px;
+.nav-link {
+  padding: 2rem !important;
 }
-nav {
-  height: 10px;
-  padding: 0;
-  margin: 0;
+.navbar-brand {
+  padding: 2rem !important;
 }
-nav ul {
-  top: 0;
-  float: right;
-  list-style-type: none;
-  margin-left: 60vw;
-  text-align: center;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: flex-start;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  padding-top: 15px;
-  transition: top 0.3s;
-}
-
-nav li {
-  float: top;
-  padding-left: 30px;
-}
-nav li a {
-  display: inline;
-  color: white;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 1000;
-  margin: 10%;
-  padding: 0px;
-  font-size: 25px;
-  text-decoration: none;
-  text-align: center;
-  align-content: center;
-}
-nav li a:hover {
+a.nav-link:hover {
   animation: bounce 2.5s infinite;
   -webkit-animation: bounce 2.5s infinite;
   -moz-animation: bounce 2.5s infinite;
   -o-animation: bounce 2.5s infinite;
-}
-
-.navName {
-  float: left;
-  padding-left: 45px;
-
-  padding-top: 0px;
-  position: fixed;
-  color: white;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 1000;
-  font-size: 25px;
-  text-decoration: none;
-  text-align: center;
-  align-content: center;
-  /* background-image: url(../Images/logo.png);
-  background-size: 45px 45px;
-  background-repeat: no-repeat; */
 }
 
 @-webkit-keyframes bounce {

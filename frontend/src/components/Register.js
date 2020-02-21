@@ -13,10 +13,14 @@ class Register extends Component {
   }
   onSubmit = e => {
     e.preventDefault();
-    axios.post("/api/users/create", { ...this.state }).then(data => {
-      console.log("data", data);
-      this.props.history.push(`/home/${data.data.email}`);
-    });
+    axios
+      .post("https://floating-bastion-36036.herokuapp.com//api/users/create", {
+        ...this.state
+      })
+      .then(data => {
+        console.log("data", data);
+        this.props.history.push(`/home/${data.data.email}`);
+      });
   };
 
   inputHandler = e => {

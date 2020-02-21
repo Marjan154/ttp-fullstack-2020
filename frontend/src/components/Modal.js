@@ -13,7 +13,7 @@ class MyModal extends Component {
 
     const handleClose = () => {
       setShow(false);
-      //   this.props.refresh();
+      this.props.refresh();
     };
     const handleShow = () => setShow(true);
 

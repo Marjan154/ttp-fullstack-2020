@@ -1,46 +1,79 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import styles from "../styles/navbar.css";
+// import "https://fonts.googleapis.com/css?family=Ubuntu&display=swap";
 
-class Nav extends Component {
+class MyNav extends Component {
   render() {
-    const email = this.props.match.params.email;
-    return (
-      <div id="nav-container">
-        <nav className="nav">
-          {/* <span className = "titleHome">Health Tracker</span> */}
-          <div className="navName">
-            <h1 style={{ color: "#1e1e6e" }}>Stock Portfolio</h1>
-          </div>
-          <ul>
-            <li>
-              <Link to={`/home/${email}`} style={{ textDecoration: "none" }}>
+    const email = "john@john.com";
+    const stylesHome = {
+      height: "100px",
+      fontSize: "40px",
+      fontFamily: "Ubuntu, sans-serif",
+      fontWeight: "1000",
+      color: "white",
+      backgroundColor: "#1e1e6e"
+    };
+    const stylesOther = {
+      height: "100px",
+      fontSize: "40px",
+      fontFamily: "Ubuntu, sans-serif",
+      fontWeight: "1000",
+      color: "#1e1e6e",
+      backgroundColor: "white"
+    };
+    console.log(this.props.location.pathname.includes("/home/"));
+    const styles = this.props.location.pathname.includes("/home/")
+      ? stylesHome
+      : stylesOther;
+    if (
+      this.props.location.pathname === "/" ||
+      this.props.location.pathname === "/register"
+    ) {
+      return <div></div>;
+    } else {
+      return (
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant={
+            this.props.location.pathname.includes("/home/") ? "dark" : "light"
+          }
+          style={styles}
+        >
+          <Navbar.Brand style={styles} href={`/home/${email}`}>
+            StockPortfolio
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{ color: "white" }}
+          >
+            <Nav className="ml-auto">
+              <Nav.Link style={styles} eventKey={1} href={`/home/${email}`}>
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={`/transactions/${email}`}
-                style={{ textDecoration: "none" }}
+              </Nav.Link>
+              <Nav.Link style={styles} eventKey={2} href={`/buy/${email}`}>
+                Buy
+              </Nav.Link>
+              <Nav.Link
+                style={styles}
+                eventKey={3}
+                href={`/transactions/${email}`}
               >
                 Transactions
-              </Link>
-            </li>
-            <li>
-              <Link to={`/buy/${email}`} style={{ textDecoration: "none" }}>
-                Buy
-              </Link>
-            </li>
-            <li>
-              <Link to="/" style={{ textDecoration: "none" }}>
+              </Nav.Link>
+
+              <Nav.Link style={styles} eventKey={4} href={`/`}>
                 Logout
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    );
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      );
+    }
   }
 }
 
-export default withRouter(Nav);
+export default withRouter(MyNav);

@@ -38,11 +38,13 @@ class MyTransactions extends Component {
     let res = this.displayTrans(this.state.transactions);
     return (
       <div style={{ marginTop: "100px" }}>
-        <Nav />
-        <h2 style={{ textAlign: "right", padding: "20px" }}>
+        {/* <Nav /> */}
+        <h1 style={{ fontSize: "5rem", margin: "30px", color: "#1e1e6e" }}>
+          My Transactions
+        </h1>
+        <h1 style={{ textAlign: "right", padding: "40px", color: "#91b0ff" }}>
           Your balance is ${this.state.balance}
-        </h2>
-        <h1>My Transactions</h1>
+        </h1>
         <div>
           <div>
             <table
