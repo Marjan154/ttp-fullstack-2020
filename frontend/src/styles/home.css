@@ -83,7 +83,7 @@
   font-family: "Ubuntu", sans-serif;
   font-weight: 1000;
   color: #91b0ff;
-  border: solid 1px #1e1e6e;
+  border: solid 1.5px #1e1e6e;
 }
 
 #homeTitle {
@@ -106,7 +106,7 @@
   flex-flow: row wrap;
   justify-content: space-around;
   text-align: center;
-  margin-top: -20vh;
+  /* margin-top: -20vh; */
 }
 
 .p-icon {

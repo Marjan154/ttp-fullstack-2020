@@ -18,6 +18,7 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    console.log("url", this.props);
     let balance = await getBalance(this.state.email);
     this.setState({ balance: Number(balance).toFixed(2) });
   }
@@ -39,7 +40,7 @@ class Home extends Component {
                 style={{
                   color: "white",
                   width: "100vw",
-                  marginTop: "-15vh"
+                  marginTop: "-5vh"
                 }}
               >
                 Today is {d.toDateString()}.
