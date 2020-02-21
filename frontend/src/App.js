@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, HashRouter as Router } from "react-router-dom";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import logo from "./logo.svg";
 import Login from "./components/Login";
@@ -17,7 +17,7 @@ function App() {
   return (
     <div>
       <div className="App">
-        <Router>
+        <Router basename="/">
           <MyNav />
           <Switch>
             <Route exact path="/" component={Login} />
