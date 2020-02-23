@@ -66,7 +66,7 @@ passport.serializeUser((user, done) => {
 
 // after serializing a user, serialize user on session
 // reads cookie
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (email, done) => {
   try {
     const user = await Users.findById(email);
     done(null, user);
