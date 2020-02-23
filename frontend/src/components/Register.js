@@ -14,7 +14,7 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     axios
-      .post("https://floating-bastion-36036.herokuapp.com//api/users/create", {
+      .post("https://floating-bastion-36036.herokuapp.com/api/users/create", {
         ...this.state
       })
       .then(data => {
@@ -35,18 +35,21 @@ class Register extends Component {
           <form className="login-form" onSubmit={this.onSubmit}>
             <input
               type="text"
+              required
               placeholder="name"
               name="name"
               onChange={this.inputHandler}
             />
             <input
               type="text"
+              required
               placeholder="email address"
               name="email"
               onChange={this.inputHandler}
             />
             <input
               type="password"
+              required
               placeholder="password"
               name="password"
               onChange={this.inputHandler}

@@ -19,7 +19,7 @@ class Login extends Component {
         ...this.state
       })
       .then(res => res.data)
-      .then(user => this.props.history.push(`/home/${user.email}`));
+      .then(user => this.props.history.replace(`/home/${user.email}`));
   };
   inputHandler = e => {
     e.preventDefault();
@@ -35,10 +35,12 @@ class Login extends Component {
               type="text"
               placeholder="Email"
               name="email"
+              required
               onChange={this.inputHandler}
             />
             <input
               type="password"
+              required
               placeholder="Password"
               name="password"
               onChange={this.inputHandler}
