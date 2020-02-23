@@ -7,7 +7,7 @@ const MyToast = props => {
     setShow(true);
     setTimeout(async () => {
       await props.handleBuy();
-    }, 500);
+    }, 650);
   };
   return (
     <Row>
@@ -17,7 +17,9 @@ const MyToast = props => {
         </Toast>
       </Col>
       <Col xs={6}>
-        <Button onClick={() => onBuy()}>Buy</Button>
+        <Button style={{ backgroundColor: "#1e1e6e" }} onClick={() => onBuy()}>
+          Buy
+        </Button>
       </Col>
     </Row>
   );

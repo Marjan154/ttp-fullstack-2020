@@ -72,14 +72,13 @@ class MakeTransactions extends Component {
 
   buyForm = (price, symbol) => (
     <div>
-      <h2 id="cost">The price is ${price}</h2>
-      <form
-      // onSubmit={e => {
-      //   e.preventDefault();
-      //   this.setState({ shares_amount: e.target.shares_amount.value });
-      //   this.buy(price, e.target.shares_amount.value, symbol);
-      // }}
-      >
+      <h2 id="cost">
+        The price is $
+        {Number(parseFloat(price) * parseInt(this.state.shares_amount)).toFixed(
+          2
+        )}
+      </h2>
+      <form>
         <input
           type="number"
           pattern="[0-9]*"
@@ -128,22 +127,15 @@ class MakeTransactions extends Component {
             <td>{stock.securityType}</td>
             <td> {stock.region} </td>
             <td>{stock.exchange}</td>
-            <td>{stockInfo[stock.symbol].price}</td>
+            <td>{Number(stockInfo[stock.symbol].price).toFixed(2)}</td>
             <td>
               <Modal
                 form={this.buyForm(stockInfo[stock.symbol].price, stock.symbol)}
                 label={"Buy"}
-                title={"Buy stock share"}
+                title={`Buy stock "${stock.symbol}"`}
                 refresh={this.refresh}
                 buy={this.buy}
                 info={info}
-                // onSub={() =>
-                //   this.buy(
-                // stockInfo[stock.symbol].price,
-                // this.state.shares_amount,
-                // stock.symbol
-                //   )
-                // }
               />
             </td>
           </tr>

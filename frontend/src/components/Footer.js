@@ -17,7 +17,7 @@ class Footer extends Component {
         }}
       >
         <div className="container text-center">
-          <span className="myfont" style={{ width: "100%", fontSize: "30px" }}>
+          <span className="myfont" style={{ width: "100%" }}>
             <b>Created by: </b>
             <br />
             Marjan Ansar

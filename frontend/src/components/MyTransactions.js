@@ -28,7 +28,7 @@ class MyTransactions extends Component {
         return (
           <tr key={trans.symbol}>
             <td>{i + 1}</td>
-            <td>{trans.date}</td>
+            <td>{trans.date.toString()}</td>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
             <td>{trans.cost}</td>
