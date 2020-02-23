@@ -62,10 +62,10 @@ class Home extends Component {
                         style={{ padding: "20px" }}
                         className="p-icon"
                       ></img>
-                      <h1>View Profile</h1>
-                      <h3 style={{ color: "#1e1e6e" }}>
+                      <h3>View Profile</h3>
+                      <h4 style={{ color: "#1e1e6e" }}>
                         You have ${this.state.balance}
-                      </h3>
+                      </h4>
                     </div>
                   </div>
                 </Link>
@@ -81,10 +81,10 @@ class Home extends Component {
                         style={{ padding: "20px" }}
                         className="p-icon"
                       ></img>
-                      <h1>View Transactions</h1>
-                      <h3 style={{ color: "#1e1e6e" }}>
+                      <h3>View Transactions</h3>
+                      <h4 style={{ color: "#1e1e6e" }}>
                         Keep track of purchases
-                      </h3>
+                      </h4>
                     </div>
                   </div>
                 </Link>
@@ -97,10 +97,10 @@ class Home extends Component {
                         style={{ padding: "20px" }}
                         className="p-icon"
                       ></img>
-                      <h1>Buy Stocks</h1>
-                      <h3 style={{ color: "#1e1e6e" }}>
+                      <h3>Buy Stocks</h3>
+                      <h4 style={{ color: "#1e1e6e" }}>
                         Search and buy stocks
-                      </h3>
+                      </h4>
                     </div>
                   </div>
                 </Link>

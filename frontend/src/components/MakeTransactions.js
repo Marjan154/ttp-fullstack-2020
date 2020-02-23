@@ -18,7 +18,8 @@ class MakeTransactions extends Component {
       bestMatches: [],
       stockInfo: {},
       balance: 0,
-      price: 0
+      price: 0,
+      shares_amount: 1
     };
   }
 
@@ -73,10 +74,11 @@ class MakeTransactions extends Component {
     <div>
       <h2 id="cost">The price is ${price}</h2>
       <form
-        onSubmit={e => {
-          e.preventDefault();
-          this.buy(price, e.target.shares_amount.value, symbol);
-        }}
+      // onSubmit={e => {
+      //   e.preventDefault();
+      //   this.setState({ shares_amount: e.target.shares_amount.value });
+      //   this.buy(price, e.target.shares_amount.value, symbol);
+      // }}
       >
         <input
           type="number"
@@ -86,8 +88,8 @@ class MakeTransactions extends Component {
           placeholder="Number of shares"
           name="shares_amount"
           defaultValue={1}
+          onChange={this.inputHandler}
         />
-        <button>Buy</button>
       </form>
     </div>
   );
@@ -114,6 +116,11 @@ class MakeTransactions extends Component {
     let res =
       stockArray &&
       stockArray.map(stock => {
+        let info = {
+          price: stockInfo[stock.symbol].price,
+          shares: this.state.shares_amount,
+          symbol: stock.symbol
+        };
         return (
           <tr key={stock.symbol}>
             <td> {stock.symbol}</td>
@@ -128,6 +135,15 @@ class MakeTransactions extends Component {
                 label={"Buy"}
                 title={"Buy stock share"}
                 refresh={this.refresh}
+                buy={this.buy}
+                info={info}
+                // onSub={() =>
+                //   this.buy(
+                // stockInfo[stock.symbol].price,
+                // this.state.shares_amount,
+                // stock.symbol
+                //   )
+                // }
               />
             </td>
           </tr>
@@ -147,7 +163,6 @@ class MakeTransactions extends Component {
         <div style={{ marginTop: "100px", marginBottom: "50px" }}>
           <h1
             style={{
-              fontSize: "5rem",
               margin: "30px",
               color: "#1e1e6e",
               marginTop: "-5vh"

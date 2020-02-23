@@ -16,7 +16,7 @@ class MyNav extends Component {
     const { email } = this.state;
     const stylesHome = {
       height: "100px",
-      fontSize: "40px",
+      fontSize: "2rem",
       fontFamily: "Ubuntu, sans-serif",
       fontWeight: "1000",
       color: "white",
@@ -24,7 +24,7 @@ class MyNav extends Component {
     };
     const stylesOther = {
       height: "100px",
-      fontSize: "40px",
+      fontSize: "2rem",
       fontFamily: "Ubuntu, sans-serif",
       fontWeight: "1000",
       color: "#1e1e6e",

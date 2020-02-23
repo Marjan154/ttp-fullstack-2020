@@ -10,7 +10,7 @@
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 50px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .datatable td,
@@ -48,7 +48,7 @@
 
 .banner {
   width: 100vw;
-  height: 60vh;
+  height: 70vh;
   background-color: #1e1e6e;
 }
 
@@ -89,7 +89,6 @@
 #homeTitle {
   font-family: "Ubuntu", sans-serif;
   padding-top: 40px;
-  font-size: 70px;
   font-weight: 1000;
   color: white;
   margin: 0;

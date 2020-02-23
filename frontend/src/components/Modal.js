@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import MyToast from "./MyToast";
 
 class MyModal extends Component {
   constructor(props) {
@@ -13,7 +14,12 @@ class MyModal extends Component {
 
     const handleClose = () => {
       setShow(false);
-      this.props.refresh();
+    };
+    const handleBuy = async () => {
+      const { price, symbol, shares } = this.props.info;
+      await this.props.buy(price, shares, symbol);
+      await this.props.refresh();
+      setShow(false);
     };
     const handleShow = () => setShow(true);
 
@@ -33,9 +39,7 @@ class MyModal extends Component {
           </Modal.Header>
           <Modal.Body> {this.props.form}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
+            <MyToast handleBuy={handleBuy} />
           </Modal.Footer>
         </Modal>
       </>
