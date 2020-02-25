@@ -85,6 +85,21 @@ router.get("/groupbysymbol/", async (req, res, next) => {
     });
 });
 
+router.get("/spent", async (req, res, next) => {
+  Transaction.findAll({
+    where: { email: req.query.email },
+    attributes: [[sequelize.fn("sum", sequelize.col("price")), "spent"]],
+    raw: true
+  })
+    .then(priceResponse => {
+      console.log("spent" + priceResponse);
+      res.status(200).json(priceResponse);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
 router
   .route("/transactions/:id")
   // GET SPECIFIC transactions for a user (where userid has been appended to "http://localhost:3000/routers/transactions/" in thunk axios request in ./reducer/index)
