@@ -16,7 +16,7 @@ class MyNav extends Component {
     const { email } = this.state;
     const stylesHome = {
       height: "100px",
-      fontSize: "2rem",
+      fontSize: "1.5rem",
       fontFamily: "Ubuntu, sans-serif",
       fontWeight: "1000",
       color: "white",
@@ -24,7 +24,7 @@ class MyNav extends Component {
     };
     const stylesOther = {
       height: "100px",
-      fontSize: "2rem",
+      fontSize: "1.7rem",
       fontFamily: "Ubuntu, sans-serif",
       fontWeight: "1000",
       color: "#1e1e6e",
@@ -69,8 +69,11 @@ class MyNav extends Component {
               <LinkContainer style={styles} to={`/transactions/${email}`}>
                 <NavItem eventKey={3}>Transactions</NavItem>
               </LinkContainer>
+              <LinkContainer style={styles} to={`/profile/${email}`}>
+                <NavItem eventKey={4}>Profile</NavItem>
+              </LinkContainer>
               <LinkContainer style={styles} to={`/`}>
-                <NavItem eventKey={4}>Logout</NavItem>
+                <NavItem eventKey={5}>Logout</NavItem>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>

@@ -72,6 +72,9 @@ class Profile extends Component {
           >
             Profile
           </h1>
+          <h1>
+            <h2>Hi {this.state.email} !</h2>
+          </h1>
           <h1
             style={{
               textAlign: "right",
