@@ -36,7 +36,11 @@ class Profile extends Component {
         const currVal = price * trans.shares;
         let cstyle = {
           color:
-            price === openPrice ? "grey" : price > openPrice ? "green" : "red"
+            Number(price).toFixed(2) === Number(openPrice).toFixed(2)
+              ? "grey"
+              : price > openPrice
+              ? "green"
+              : "red"
         };
         return (
           <tr key={trans.symbol}>
@@ -46,8 +50,8 @@ class Profile extends Component {
               <strong>{Number(currVal).toFixed(2)}</strong>
             </td>
             <td style={cstyle}> {Number(currentPrice).toFixed(2)} </td>
-            <td>{openPrice} </td>
-            <td> {closePrice} </td>
+            <td>{Number(openPrice).toFixed(2)} </td>
+            <td> {Number(closePrice).toFixed(2)} </td>
           </tr>
         );
       });

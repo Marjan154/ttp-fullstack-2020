@@ -131,7 +131,7 @@ class MakeTransactions extends Component {
             <td>{stock.securityType}</td>
             <td> {stock.region} </td>
             <td>{stock.exchange}</td>
-            <td>{Number(price).toFixed(2)}</td>
+            <td>${Number(price).toFixed(2)}</td>
             <td>
               <Modal
                 form={this.buyForm(price, stock.symbol)}

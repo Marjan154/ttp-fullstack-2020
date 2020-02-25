@@ -11,13 +11,16 @@ class MyTransactions extends Component {
       transactions: []
     };
   }
-  async componentDidMount() {
-    console.log(this.props.match.params.email);
-    let transactions = await getAllTransactions(this.state.email);
-    let balance = await getBalance(this.state.email);
-    this.setState({
-      transactions: transactions[0],
-      balance: Number(balance).toFixed(2)
+  componentDidMount() {
+    getAllTransactions(this.state.email).then(transactions => {
+      this.setState({
+        transactions: transactions[0]
+      });
+    });
+    getBalance(this.state.email).then(balance => {
+      this.setState({
+        balance: Number(balance).toFixed(2)
+      });
     });
   }
 
@@ -31,7 +34,7 @@ class MyTransactions extends Component {
             <td>{trans.date.toString()}</td>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
-            <td>{trans.cost}</td>
+            <td>${trans.cost}</td>
           </tr>
         );
       });
@@ -63,30 +66,34 @@ class MyTransactions extends Component {
           >
             Your balance is ${this.state.balance}
           </h1>
-          <div>
+          {res.length ? (
             <div>
-              <table
-                className="datatable"
-                style={{
-                  width: "85vw",
-                  boxShadow: "4px 4px 5px grey",
-                  margin: "auto",
-                  paddingTop: "80px"
-                }}
-              >
-                <thead className="thead-light">
-                  <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Symbol/Ticker</th>
-                    <th>Number of Shares</th>
-                    <th>Cost</th>
-                  </tr>
-                </thead>
-                <tbody>{res}</tbody>
-              </table>
+              <div>
+                <table
+                  className="datatable"
+                  style={{
+                    width: "85vw",
+                    boxShadow: "4px 4px 5px grey",
+                    margin: "auto",
+                    paddingTop: "80px"
+                  }}
+                >
+                  <thead className="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Symbol/Ticker</th>
+                      <th>Number of Shares</th>
+                      <th>Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>{res}</tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          ) : (
+            <h1>You have no transactions!</h1>
+          )}
         </div>
       </div>
     );
