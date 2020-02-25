@@ -48,7 +48,6 @@ class MyTransactions extends Component {
         <div style={{ marginTop: "100px" }}>
           <h1
             style={{
-              fontSize: "5rem",
               margin: "30px",
               color: "#1e1e6e",
               marginTop: "-5vh"

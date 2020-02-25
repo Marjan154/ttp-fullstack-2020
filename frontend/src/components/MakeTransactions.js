@@ -121,7 +121,8 @@ class MakeTransactions extends Component {
         let info = {
           price,
           shares: this.state.shares_amount,
-          symbol: stock.symbol
+          symbol: stock.symbol,
+          balance: this.state.balance
         };
 
         return (

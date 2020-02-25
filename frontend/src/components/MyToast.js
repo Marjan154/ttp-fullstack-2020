@@ -5,15 +5,21 @@ const MyToast = props => {
   const [show, setShow] = useState(false);
   const onBuy = async () => {
     setShow(true);
-    setTimeout(async () => {
-      await props.handleBuy();
-    }, 650);
+    if (props.canBuy) {
+      setTimeout(async () => {
+        await props.handleBuy();
+      }, 650);
+    }
   };
   return (
     <Row>
       <Col xs={6}>
         <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-          <Toast.Body>Thank You for Buying!</Toast.Body>
+          <Toast.Body>
+            {props.canBuy
+              ? "Thank You for Buying!"
+              : "Sorry, you don't have enough to buy!"}
+          </Toast.Body>
         </Toast>
       </Col>
       <Col xs={6}>

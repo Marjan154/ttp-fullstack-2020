@@ -9,14 +9,16 @@ class MyModal extends Component {
       startDate: new Date()
     };
   }
+
   genericModal = () => {
     const [show, setShow] = useState(false);
+    const { price, symbol, shares, balance } = this.props.info;
 
     const handleClose = () => {
       setShow(false);
     };
+
     const handleBuy = async () => {
-      const { price, symbol, shares } = this.props.info;
       await this.props.buy(price, shares, symbol);
       await this.props.refresh();
       setShow(false);
@@ -39,7 +41,7 @@ class MyModal extends Component {
           </Modal.Header>
           <Modal.Body> {this.props.form}</Modal.Body>
           <Modal.Footer>
-            <MyToast handleBuy={handleBuy} />
+            <MyToast handleBuy={handleBuy} canBuy={price <= balance} />
           </Modal.Footer>
         </Modal>
       </>
