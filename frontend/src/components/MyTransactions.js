@@ -8,15 +8,24 @@ class MyTransactions extends Component {
     super(props);
     this.state = {
       email: this.props.match.params.email,
-      transactions: []
+      transactions: [],
+      loading: true
     };
   }
   componentDidMount() {
-    getAllTransactions(this.state.email).then(transactions => {
-      this.setState({
-        transactions: transactions[0]
+    getAllTransactions(this.state.email)
+      .then(transactions => {
+        this.setState({
+          transactions: transactions[0],
+          loading: false
+        });
+      })
+      .catch(e => {
+        this.setState({
+          loading: false
+        });
+        console.log(e);
       });
-    });
     getBalance(this.state.email).then(balance => {
       this.setState({
         balance: Number(balance).toFixed(2)
@@ -38,7 +47,7 @@ class MyTransactions extends Component {
           </tr>
         );
       });
-    return res;
+    return res.length ? res : <h1>You have no transactions!</h1>;
   };
   render() {
     let res = this.displayTrans(this.state.transactions);
@@ -91,7 +100,9 @@ class MyTransactions extends Component {
               </div>
             </div>
           ) : (
-            <h1>You have no transactions!</h1>
+            <h1>
+              {this.state.loading ? "Loading..." : "You have no transactions!"}
+            </h1>
           )}
         </div>
       </div>
