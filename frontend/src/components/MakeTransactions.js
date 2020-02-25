@@ -115,11 +115,15 @@ class MakeTransactions extends Component {
     let res =
       stockArray &&
       stockArray.map(stock => {
+        const price =
+          stockInfo[stock.symbol].price ||
+          stockInfo[stock.symbol].quote.latestPrice;
         let info = {
-          price: stockInfo[stock.symbol].price,
+          price,
           shares: this.state.shares_amount,
           symbol: stock.symbol
         };
+
         return (
           <tr key={stock.symbol}>
             <td> {stock.symbol}</td>
@@ -127,10 +131,10 @@ class MakeTransactions extends Component {
             <td>{stock.securityType}</td>
             <td> {stock.region} </td>
             <td>{stock.exchange}</td>
-            <td>{Number(stockInfo[stock.symbol].price).toFixed(2)}</td>
+            <td>{Number(price).toFixed(2)}</td>
             <td>
               <Modal
-                form={this.buyForm(stockInfo[stock.symbol].price, stock.symbol)}
+                form={this.buyForm(price, stock.symbol)}
                 label={"Buy"}
                 title={`Buy stock "${stock.symbol}"`}
                 refresh={this.refresh}

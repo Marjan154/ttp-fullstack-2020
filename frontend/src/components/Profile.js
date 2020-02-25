@@ -26,23 +26,28 @@ class Profile extends Component {
     let res =
       transArray &&
       transArray.map(trans => {
-        const currVal = priceArray[trans.symbol].price * trans.shares;
-        const color =
-          priceArray[trans.symbol].price >
-          priceArray[trans.symbol].ohlc.open.price
-            ? "green"
-            : "red";
+        const currentPrice = priceArray[trans.symbol].price;
+        const latestPrice = priceArray[trans.symbol].quote.latestPrice;
+        const price = currentPrice || latestPrice;
+        const openPrice =
+          priceArray[trans.symbol].ohlc.open.price || latestPrice || "N/A";
+        let closePrice =
+          priceArray[trans.symbol].ohlc.close.price || latestPrice || "N/A";
+        const currVal = price * trans.shares;
         let cstyle = {
-          color
+          color:
+            price === openPrice ? "grey" : price > openPrice ? "green" : "red"
         };
         return (
           <tr key={trans.symbol}>
-            <td> {trans.symbol}</td>
+            <td style={cstyle}> {trans.symbol}</td>
             <td>{trans.shares}</td>
-            <td style={cstyle}>{currVal}</td>
-            <td>{priceArray[trans.symbol].ohlc.open.price || "N/A"} </td>
-            <td style={cstyle}> {priceArray[trans.symbol].price} </td>
-            <td> {priceArray[trans.symbol].ohlc.close.price || "N/A"} </td>
+            <td style={cstyle}>
+              <strong>{Number(currVal).toFixed(2)}</strong>
+            </td>
+            <td style={cstyle}> {Number(currentPrice).toFixed(2)} </td>
+            <td>{openPrice} </td>
+            <td> {closePrice} </td>
           </tr>
         );
       });
@@ -87,10 +92,10 @@ class Profile extends Component {
                 <thead className="thead-light">
                   <tr>
                     <th>Symbol/Ticker</th>
-                    <th>Number of Shares</th>
+                    <th># of Shares</th>
                     <th>Current Value</th>
-                    <th>Open Price</th>
                     <th>Current Price</th>
+                    <th>Open Price</th>
                     <th>Close Price</th>
                   </tr>
                 </thead>

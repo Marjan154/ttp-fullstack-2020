@@ -14,15 +14,16 @@ export let getAllStocks = async searchval => {
 
 export let getStockAllPrices = async symbols => {
   let symbolsS = symbols.join(",");
-  let url = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbolsS}&types=price,ohlc&token=${key}`;
+  let url = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbolsS}&types=price,quote,ohlc&token=${key}`;
   let sdata = await axios.get(url).then(data => data.data);
   return sdata;
 };
 
 export let getStockPrice = async symbol => {
-  let url = `https://sandbox.iexapis.com/stable/stock/${symbol}/price?token=${key}`;
+  let url = `https://sandbox.iexapis.com/stable/stock/${symbol}/quote/latestPrice?token=${key}`;
   let sprice = await axios.get(url).then(data => {
     return data.data;
   });
   return sprice;
 };
+// https://sandbox.iexapis.com/stable/stock/twtr/quote/latestPrice?token=Tsk_d9296a7ab70041219aeeadca59917e1e
