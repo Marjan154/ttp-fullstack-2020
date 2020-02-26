@@ -94,7 +94,7 @@ router.get("/groupbysymbol/", async (req, res, next) => {
 router.get("/spent", async (req, res, next) => {
   Transaction.findAll({
     where: { email: req.query.email },
-    attributes: [[Sequelize.fn("sum", Sequelize.col("price")), "spent"]],
+    attributes: [[Sequelize.fn("sum", Sequelize.col("cost")), "spent"]],
     raw: true
   })
     .then(priceResponse => {
