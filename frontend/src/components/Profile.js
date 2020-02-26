@@ -9,16 +9,28 @@ class Profile extends Component {
     this.state = {
       email: this.props.match.params.email,
       transactions: [],
-      prices: {}
+      prices: {},
+      loading: true
     };
   }
   async componentDidMount() {
-    let transactions = await getAllSymbols(this.state.email);
-    let balance = await getBalance(this.state.email);
-    this.setState({
-      transactions: transactions[0],
-      prices: transactions[1],
-      balance: Number(balance).toFixed(2)
+    getAllSymbols(this.state.email)
+      .then(transactions =>
+        this.setState({
+          transactions: transactions[0],
+          prices: transactions[1]
+        })
+      )
+      .catch(e => {
+        this.setState({
+          loading: false
+        });
+        console.log(e);
+      });
+    getBalance(this.state.email).then(balance => {
+      this.setState({
+        balance: Number(balance).toFixed(2)
+      });
     });
   }
 
@@ -87,27 +99,35 @@ class Profile extends Component {
           </h1>
           <div>
             <div>
-              <table
-                className="datatable"
-                style={{
-                  width: "85vw",
-                  boxShadow: "4px 4px 5px grey",
-                  margin: "auto",
-                  paddingTop: "80px"
-                }}
-              >
-                <thead className="thead-light">
-                  <tr>
-                    <th>Symbol/Ticker</th>
-                    <th># of Shares</th>
-                    <th>Current Value</th>
-                    <th>Current Price</th>
-                    <th>Open Price</th>
-                    <th>Close Price</th>
-                  </tr>
-                </thead>
-                <tbody>{res}</tbody>
-              </table>
+              {res.length ? (
+                <table
+                  className="datatable"
+                  style={{
+                    width: "85vw",
+                    boxShadow: "4px 4px 5px grey",
+                    margin: "auto",
+                    paddingTop: "80px"
+                  }}
+                >
+                  <thead className="thead-light">
+                    <tr>
+                      <th>Symbol/Ticker</th>
+                      <th># of Shares</th>
+                      <th>Current Value</th>
+                      <th>Current Price</th>
+                      <th>Open Price</th>
+                      <th>Close Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>{res}</tbody>
+                </table>
+              ) : (
+                <h1>
+                  {this.state.loading
+                    ? "Loading..."
+                    : "You have no stocks! Go buy some."}
+                </h1>
+              )}
             </div>
           </div>
         </div>

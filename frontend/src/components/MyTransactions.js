@@ -167,25 +167,29 @@ class MyTransactions extends Component {
                   </tbody>
                 </table>
               </div>
+              <div className="buttonContainer">
+                <button
+                  className="mybutton"
+                  onClick={this.findPrevious}
+                  id="back_button"
+                >
+                  Back
+                </button>
+                <h5>{1 + Math.ceil(this.state.offset / this.state.limit)}</h5>
+                <button
+                  className="mybutton"
+                  onClick={this.findNext}
+                  id="next_button"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           ) : (
             <h1>
               {this.state.loading ? "Loading..." : "You have no transactions!"}
             </h1>
           )}
-        </div>
-        <div className="buttonContainer">
-          <button
-            className="mybutton"
-            onClick={this.findPrevious}
-            id="back_button"
-          >
-            Back
-          </button>
-          <h5>{1 + Math.ceil(this.state.offset / this.state.limit)}</h5>
-          <button className="mybutton" onClick={this.findNext} id="next_button">
-            Next
-          </button>
         </div>
       </div>
     );
