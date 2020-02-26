@@ -18,6 +18,7 @@ class MyTransactions extends Component {
   }
   componentDidMount() {
     getSpent(this.state.email).then(spent => console.log(spent));
+
     getAllTransactions(this.state.email)
       .then(transactions => {
         this.setState({

@@ -1,12 +1,14 @@
 import axios from "axios";
 import { getStockAllPrices } from "./stockApi.js";
 
-export let getAllTransactions = async email => {
+export let getAllTransactions = async (email, limit, offset) => {
   let url =
     "https://floating-bastion-36036.herokuapp.com/api/transactions/transactions/";
   let trans = await axios.get(url, {
     params: {
-      email
+      email,
+      limit,
+      offset
     }
   });
   let symbols = trans.data.map(trans => trans.symbol);
