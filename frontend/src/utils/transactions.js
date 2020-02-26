@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getStockAllPrices } from "./stockApi.js";
 
-export let getAllTransactions = async (email, limit, offset) => {
+export let getAllTransactions = async (email, offset, limit) => {
   let url =
     "https://floating-bastion-36036.herokuapp.com/api/transactions/transactions/";
   let trans = await axios.get(url, {
@@ -38,15 +38,13 @@ export let getBalance = async email => {
   return bal.data.balance;
 };
 export let getSpent = async email => {
-  console.log("in");
   let url = `https://floating-bastion-36036.herokuapp.com/api/transactions/spent/`;
   let spent = await axios.get(url, {
     params: {
       email
     }
   });
-  console.log("spent is", spent);
-  return spent.data.spent;
+  return spent.data[0] ? spent.data[0].spent : 0;
 };
 
 export let makeTransaction = async stock => {
