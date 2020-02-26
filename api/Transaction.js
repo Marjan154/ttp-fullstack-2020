@@ -111,7 +111,7 @@ router.get("/count", async (req, res, next) => {
     raw: true
   })
     .then(transcountResponse => {
-      console.log("spent" + transcountResponse);
+      console.log("count" + transcountResponse);
       res.status(200).json(transcountResponse);
     })
     .catch(error => {

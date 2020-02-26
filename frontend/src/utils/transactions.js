@@ -48,12 +48,14 @@ export let getSpent = async email => {
 };
 
 export let getCount = async email => {
-  let url = `https://floating-bastion-36036.herokuapp.com/api/transactions/spent/`;
+  console.log("inn");
+  let url = `https://floating-bastion-36036.herokuapp.com/api/transactions/count/`;
   let count = await axios.get(url, {
     params: {
       email
     }
   });
+  console.log("count is", count);
   return count.data[0] ? count.data[0].count : 0;
 };
 

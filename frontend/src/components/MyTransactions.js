@@ -35,10 +35,17 @@ class MyTransactions extends Component {
     });
   }
 
-  findTransactions = async (offset, limit) => {
-    let trans = await getAllTransactions(this.state.email, offset, limit);
-    this.setState({ transactions: trans[0] });
-    return trans[0];
+  findTransactions = (offset, limit) => {
+    getAllTransactions(this.state.email, offset, limit)
+      .then(trans => {
+        this.setState({ transactions: trans[0] });
+      })
+      .catch(e => {
+        this.setState({
+          loading: false
+        });
+        console.log(e);
+      });
   };
 
   disableButton(buttonid, disabled) {

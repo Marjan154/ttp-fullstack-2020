@@ -4,7 +4,7 @@ import axios from "axios";
 import MyNav from "./Nav";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
-import { getBalance } from "../utils/transactions";
+import { getBalance, getSpent, getCount } from "../utils/transactions";
 
 class Home extends Component {
   constructor(props) {
@@ -20,7 +20,9 @@ class Home extends Component {
   async componentDidMount() {
     console.log(this.props.match.params.email);
     let balance = await getBalance(this.state.email);
-    this.setState({ balance: Number(balance).toFixed(2) });
+    let count = await getCount(this.state.email);
+    let spent = await getSpent(this.state.email);
+    this.setState({ balance: Number(balance).toFixed(2), count, spent });
   }
 
   render() {
@@ -64,7 +66,7 @@ class Home extends Component {
                       ></img>
                       <h3>View Profile</h3>
                       <h4 style={{ color: "#1e1e6e" }}>
-                        You have ${this.state.balance}
+                        Your balance is ${this.state.balance}
                       </h4>
                     </div>
                   </div>
@@ -83,7 +85,9 @@ class Home extends Component {
                       ></img>
                       <h3>View Transactions</h3>
                       <h4 style={{ color: "#1e1e6e" }}>
-                        Keep track of purchases
+                        {this.state.count
+                          ? `You have made ${this.state.count} puchases`
+                          : "Your purchase history"}
                       </h4>
                     </div>
                   </div>
@@ -99,7 +103,9 @@ class Home extends Component {
                       ></img>
                       <h3>Buy Stocks</h3>
                       <h4 style={{ color: "#1e1e6e" }}>
-                        Search and buy stocks
+                        {this.state.spent
+                          ? `You have spent $${this.state.spent} on stocks`
+                          : "Invest today"}
                       </h4>
                     </div>
                   </div>

@@ -69,7 +69,7 @@
 }
 
 .stat {
-  width: 30vw;
+  min-width: 30vw;
   height: 35vh;
   display: flex;
   margin: 10px;

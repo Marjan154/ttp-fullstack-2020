@@ -47,11 +47,11 @@ class Profile extends Component {
             <td style={cstyle}> {trans.symbol}</td>
             <td>{trans.shares}</td>
             <td style={cstyle}>
-              <strong>{Number(currVal).toFixed(2)}</strong>
+              <strong>${Number(currVal).toFixed(2)}</strong>
             </td>
-            <td style={cstyle}> {Number(currentPrice).toFixed(2)} </td>
-            <td>{Number(openPrice).toFixed(2)} </td>
-            <td> {Number(closePrice).toFixed(2)} </td>
+            <td style={cstyle}> ${Number(currentPrice).toFixed(2)} </td>
+            <td>${Number(openPrice).toFixed(2)} </td>
+            <td> ${Number(closePrice).toFixed(2)} </td>
           </tr>
         );
       });
