@@ -5,6 +5,7 @@ import {
   getBalance,
   getSpent
 } from "../utils/transactions";
+import style from "../styles/mytrans.css";
 import Nav from "./Nav";
 
 class MyTransactions extends Component {
@@ -13,50 +14,84 @@ class MyTransactions extends Component {
     this.state = {
       email: this.props.match.params.email,
       transactions: [],
-      loading: true
+      display: [],
+      loading: true,
+      offset: 0,
+      limit: 20,
+      page: 1
     };
   }
   componentDidMount() {
-    getSpent(this.state.email).then(spent => console.log(spent));
-
-    getAllTransactions(this.state.email)
-      .then(transactions => {
-        this.setState({
-          transactions: transactions[0],
-          loading: false
-        });
-      })
-      .catch(e => {
-        this.setState({
-          loading: false
-        });
-        console.log(e);
-      });
+    this.findTransactions(this.state.offset, this.state.limit);
     getBalance(this.state.email).then(balance => {
       this.setState({
         balance: Number(balance).toFixed(2)
       });
     });
+    getSpent(this.state.email).then(spent => {
+      this.setState({
+        spent: Number(spent).toFixed(2)
+      });
+    });
   }
 
+  findTransactions = async (offset, limit) => {
+    let trans = await getAllTransactions(this.state.email, offset, limit);
+    this.setState({ transactions: trans[0] });
+    return trans[0];
+  };
+
+  disableButton(buttonid, disabled) {
+    document.getElementById(buttonid).disabled = disabled;
+  }
+
+  findNext = () => {
+    const { limit, offset } = this.state;
+    if (this.state.transactions.length >= limit) {
+      this.disableButton("next_button", false);
+      this.disableButton("back_button", false);
+      const newOffset = offset + limit;
+      this.setState({ offset: newOffset, page: this.state.page + 1 }, () => {
+        this.findTransactions(this.state.offset, this.state.limit);
+      });
+    } else {
+      this.disableButton("next_button", true);
+    }
+  };
+
+  findPrevious = () => {
+    const { limit, offset } = this.state;
+    if (offset && offset > 0) {
+      this.disableButton("next_button", false);
+      const newOffset = offset - limit < 0 ? 0 : offset - limit;
+      this.setState({ offset: newOffset, page: this.state.page - 1 }, () => {
+        this.findTransactions(this.state.offset, this.state.limit);
+      });
+    } else {
+      this.disableButton("back_button", true);
+    }
+  };
+
   displayTrans = transArray => {
-    let res =
-      transArray &&
+    return transArray.length ? (
       transArray.map((trans, i) => {
         return (
-          <tr key={trans.symbol}>
-            <td>{i + 1}</td>
+          <tr key={i}>
+            <td>
+              {this.state.offset} {i + 1} {this.state.offset + i + 1}
+            </td>
             <td>{trans.date.toString()}</td>
             <td> {trans.symbol}</td>
             <td>{trans.shares}</td>
             <td>${trans.cost}</td>
           </tr>
         );
-      });
-    return res.length ? res : <h1>You have no transactions!</h1>;
+      })
+    ) : (
+      <h1>You have no transactions!</h1>
+    );
   };
   render() {
-    let res = this.displayTrans(this.state.transactions);
     return (
       <div>
         <Nav />
@@ -80,7 +115,17 @@ class MyTransactions extends Component {
           >
             Your balance is ${this.state.balance}
           </h1>
-          {res.length ? (
+          <h1
+            style={{
+              textAlign: "right",
+              padding: "40px",
+              color: "#91b0ff",
+              marginTop: "-5vh"
+            }}
+          >
+            Your have spent a total of ${this.state.spent}
+          </h1>
+          {this.state.transactions.length ? (
             <div>
               <div>
                 <table
@@ -92,7 +137,7 @@ class MyTransactions extends Component {
                     paddingTop: "80px"
                   }}
                 >
-                  <thead className="thead-light">
+                  <tbody>
                     <tr>
                       <th>#</th>
                       <th>Date</th>
@@ -100,8 +145,19 @@ class MyTransactions extends Component {
                       <th>Number of Shares</th>
                       <th>Cost</th>
                     </tr>
-                  </thead>
-                  <tbody>{res}</tbody>
+
+                    {this.state.transactions.map((trans, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{this.state.offset + i + 1}</td>
+                          <td>{trans.date.toString()}</td>
+                          <td> {trans.symbol}</td>
+                          <td>{trans.shares}</td>
+                          <td>${trans.cost}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -110,6 +166,19 @@ class MyTransactions extends Component {
               {this.state.loading ? "Loading..." : "You have no transactions!"}
             </h1>
           )}
+        </div>
+        <div className="buttonContainer">
+          <button
+            className="mybutton"
+            onClick={this.findPrevious}
+            id="back_button"
+          >
+            Back
+          </button>
+          <h5>{1 + Math.ceil(this.state.offset / this.state.limit)}</h5>
+          <button className="mybutton" onClick={this.findNext} id="next_button">
+            Next
+          </button>
         </div>
       </div>
     );

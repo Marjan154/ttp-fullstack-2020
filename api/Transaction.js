@@ -22,8 +22,7 @@ router.get("/transactions", (req, res) => {
   Transaction.findAll({
     where: { email },
     limit: limit || 20,
-    offset,
-    order: [["date", "DESC"]]
+    offset
   })
     .then(transactionResponse => {
       res.status(200).json(transactionResponse);
