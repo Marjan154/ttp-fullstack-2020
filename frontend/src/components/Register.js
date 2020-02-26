@@ -8,7 +8,8 @@ class Register extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      invalid: false
     };
   }
   onSubmit = e => {
@@ -20,6 +21,10 @@ class Register extends Component {
       .then(data => {
         console.log("data", data);
         this.props.history.push(`/home/${data.data.email}`);
+      })
+      .catch(e => {
+        this.setState({ invalid: true });
+        console.log(e);
       });
   };
 
@@ -31,6 +36,20 @@ class Register extends Component {
     return (
       <div className="login-page">
         <h1>STOCK PORTFOLIO</h1>
+        {this.state.invalid ? (
+          <h5
+            style={{
+              padding: "15px",
+              backgroundColor: "#ed8282",
+              color: "white",
+              opacity: "85%"
+            }}
+          >
+            This user already exists.
+          </h5>
+        ) : (
+          <div />
+        )}
         <div className="form">
           <form className="login-form" onSubmit={this.onSubmit}>
             <input

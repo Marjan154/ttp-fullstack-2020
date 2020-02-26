@@ -9,7 +9,8 @@ class Login extends Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      invalid: false
     };
   }
   onSubmit = e => {
@@ -19,17 +20,39 @@ class Login extends Component {
         ...this.state
       })
       .then(res => res.data)
-      .then(user => this.props.history.replace(`/home/${user.email}`));
+      .then(user => {
+        this.setState({ invalid: false });
+        this.props.history.replace(`/home/${user.email}`);
+      })
+      .catch(e => {
+        this.setState({ invalid: true });
+        console.log(e);
+      });
   };
   inputHandler = e => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
+    console.log(this.state.invalid);
     return (
       <div className="login-page">
         <h1>STOCK PORTFOLIO</h1>
-        <div className="form">
+        {this.state.invalid ? (
+          <h5
+            style={{
+              padding: "15px",
+              backgroundColor: "#ed8282",
+              color: "white",
+              opacity: "85%"
+            }}
+          >
+            Invalid Username or Login
+          </h5>
+        ) : (
+          <div />
+        )}
+        <div className="form" id="lform">
           <form className="login-form" onSubmit={this.onSubmit}>
             <input
               type="text"
@@ -45,9 +68,7 @@ class Login extends Component {
               name="password"
               onChange={this.inputHandler}
             />
-            {/* <Link to="/home"> */}
             <button>Login</button>
-            {/* </Link> */}
             <Link to="/register">
               <p className="message">Not registered?</p>
             </Link>
