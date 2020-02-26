@@ -21,20 +21,6 @@ router.put("/login", async (req, res, next) => {
   })(req, res, next);
 });
 
-// router.put("/login", (req, res, next) => {
-//   passport.authenticate("local", function(err, user, info) {
-// if (err) {
-//   return res.status(401).json(err);
-// }
-// if (user) {
-//   console.log("working");
-// } else {
-//   console.log("not working");
-//   res.status(401).json(info);
-// }
-//   })(req, res, next);
-// });
-
 router.delete("/logout", (req, res, next) => {
   if (req.session) {
     // delete session object
