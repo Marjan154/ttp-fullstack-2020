@@ -35,6 +35,17 @@ export let getBalance = async email => {
   });
   return bal.data.balance;
 };
+export let getSpent = async email => {
+  console.log("in");
+  let url = `https://floating-bastion-36036.herokuapp.com/api/transactions/spent/`;
+  let spent = await axios.get(url, {
+    params: {
+      email
+    }
+  });
+  console.log("spent is", spent);
+  return spent.data.spent;
+};
 
 export let makeTransaction = async stock => {
   let url =

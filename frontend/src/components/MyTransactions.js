@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { getAllTransactions, getBalance } from "../utils/transactions";
+import {
+  getAllTransactions,
+  getBalance,
+  getSpent
+} from "../utils/transactions";
 import Nav from "./Nav";
 
 class MyTransactions extends Component {
@@ -13,6 +17,7 @@ class MyTransactions extends Component {
     };
   }
   componentDidMount() {
+    getSpent(this.state.email).then(spent => console.log(spent));
     getAllTransactions(this.state.email)
       .then(transactions => {
         this.setState({

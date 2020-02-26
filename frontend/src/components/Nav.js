@@ -12,7 +12,6 @@ class MyNav extends Component {
     };
   }
   render() {
-    console.log(this.props);
     const { email } = this.state;
     const stylesHome = {
       height: "100px",

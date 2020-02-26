@@ -17,11 +17,11 @@ router.use(
 
 //GET ALL TRANSACTIONS
 router.get("/transactions", (req, res) => {
-  const { email, offset } = req.query;
+  const { email, offset, limit } = req.query;
 
   Transaction.findAll({
     where: { email },
-    limit: 20,
+    limit: limit || 20,
     offset,
     order: [["date", "DESC"]]
   })
@@ -94,7 +94,7 @@ router.get("/groupbysymbol/", async (req, res, next) => {
 router.get("/spent", async (req, res, next) => {
   Transaction.findAll({
     where: { email: req.query.email },
-    attributes: [[sequelize.fn("sum", sequelize.col("price")), "spent"]],
+    attributes: [[sequelize.fn("sum", Sequelize.col("price")), "spent"]],
     raw: true
   })
     .then(priceResponse => {
