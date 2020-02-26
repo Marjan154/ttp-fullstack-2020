@@ -104,7 +104,20 @@ router.get("/spent", async (req, res, next) => {
       res.status(400).send(error);
     });
 });
-
+router.get("/count", async (req, res, next) => {
+  Transaction.findAll({
+    where: { email: req.query.email },
+    attributes: [[Sequelize.fn("count", Sequelize.col("transid")), "count"]],
+    raw: true
+  })
+    .then(transcountResponse => {
+      console.log("spent" + transcountResponse);
+      res.status(200).json(transcountResponse);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
 router
   .route("/transactions/:id")
   // GET SPECIFIC transactions for a user (where userid has been appended to "http://localhost:3000/routers/transactions/" in thunk axios request in ./reducer/index)
