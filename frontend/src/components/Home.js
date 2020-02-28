@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "../styles/home.css";
 import axios from "axios";
 import MyNav from "./Nav";
-import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { getBalance, getSpent, getCount } from "../utils/transactions";
 
@@ -18,7 +17,6 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.match.params.email);
     let balance = await getBalance(this.state.email);
     let count = await getCount(this.state.email);
     let spent = await getSpent(this.state.email);
@@ -32,10 +30,7 @@ class Home extends Component {
       <div>
         <MyNav />
         <div>
-          {/* <MyNav /> */}
           <div className="banner">
-            {/* <h1>Welcome {this.state.email}</h1>
-          <h1>Profile (${this.state.totalCash})</h1> */}
             <div className="grid-container">
               <h1 id="homeTitle">Welcome {email} !</h1>
 
@@ -48,8 +43,8 @@ class Home extends Component {
               >
                 Today is {d.toDateString()}.
                 <br />
-                Your'e balance is ${this.state.balance}. What would you like to
-                do today?
+                Your balance is ${this.state.balance}. What would you like to do
+                today?
               </h1>
 
               <div className="stats">

@@ -34,7 +34,6 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    console.log(this.state.invalid);
     return (
       <div className="login-page">
         <h1>STOCK PORTFOLIO</h1>

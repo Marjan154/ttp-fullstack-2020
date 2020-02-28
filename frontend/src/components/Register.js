@@ -19,7 +19,6 @@ class Register extends Component {
         ...this.state
       })
       .then(data => {
-        console.log("data", data);
         this.props.history.push(`/home/${data.data.email}`);
       })
       .catch(e => {

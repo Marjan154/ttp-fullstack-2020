@@ -26,4 +26,3 @@ export let getStockPrice = async symbol => {
   });
   return sprice;
 };
-// https://sandbox.iexapis.com/stable/stock/twtr/quote/latestPrice?token=Tsk_d9296a7ab70041219aeeadca59917e1e
