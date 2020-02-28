@@ -1,0 +1,130 @@
+/* body {
+  background-color: white;
+} */
+
+.title {
+  color: #91b0ff;
+}
+.datatable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
+  font-size: 1rem;
+}
+
+.datatable td,
+#datatable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.datatable tr:nth-child(even) {
+  background-color: #dbe5ff;
+}
+
+.datatable tr:hover {
+  background-color: #ddd;
+}
+
+.datatable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 5px;
+  text-align: left;
+  background-color: #1e1e6e;
+  color: white;
+}
+
+.grid-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.banner {
+  width: 100vw;
+  height: 70vh;
+  background-color: #1e1e6e;
+}
+
+.summary {
+  width: 93vw;
+  height: 37vh;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  background-color: white;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 1000;
+  color: #91b0ff;
+  border: solid 1px #1e1e6e;
+}
+
+.stat {
+  min-width: 30vw;
+  height: 35vh;
+  display: flex;
+  margin: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 1000;
+  color: #91b0ff;
+  border: solid 1.5px #1e1e6e;
+}
+
+#homeTitle {
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 40px;
+  font-weight: 1000;
+  color: white;
+  margin: 0;
+}
+
+.stat:hover {
+  box-shadow: 0 8px 16px 0 rgb(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  text-decoration: none !important;
+}
+
+.stats {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+  /* margin-top: -20vh; */
+}
+
+.p-icon {
+  /* max-height: 100px; */
+  max-width: 30vw;
+  width: 150px;
+}
+
+#icons {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#icons p {
+  max-width: 30vw;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #245db3;
+}
